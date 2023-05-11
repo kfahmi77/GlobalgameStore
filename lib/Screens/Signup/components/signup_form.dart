@@ -1,28 +1,48 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:globalgamestore/Screens/Signup/components/validator.dart';
+import 'package:globalgamestore/profile/profile.dart';
 
 import '../../../components/already_have_an_account_acheck.dart';
 import '../../../constants.dart';
 import '../../Login/login_screen.dart';
+import '../services/sign_up_services.dart';
 
-class SignUpForm extends StatelessWidget {
+class SignUpForm extends StatefulWidget {
   const SignUpForm({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<SignUpForm> createState() => _SignUpFormState();
+}
+
+class _SignUpFormState extends State<SignUpForm> {
+  @override
   Widget build(BuildContext context) {
+    final _nameTextController = TextEditingController();
+    final _emailTextController = TextEditingController();
+    final _passwordTextController = TextEditingController();
+
+    final _focusName = FocusNode();
+    final _focusEmail = FocusNode();
+    final _focusPassword = FocusNode();
+    final _formKey = GlobalKey<FormState>();
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           TextFormField(
-            keyboardType: TextInputType.emailAddress,
+            keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
-            onSaved: (email) {},
-            decoration: InputDecoration(
+            controller: _nameTextController,
+            focusNode: _focusName,
+            validator: (value) => Validator.validateName(name: value!),
+            decoration: const InputDecoration(
               hintText: "Username",
               prefixIcon: Padding(
-                padding: const EdgeInsets.all(defaultPadding),
+                padding: EdgeInsets.all(defaultPadding),
                 child: Icon(Icons.person),
               ),
             ),
@@ -31,12 +51,16 @@ class SignUpForm extends StatelessWidget {
           TextFormField(
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
+            controller: _emailTextController,
+            focusNode: _focusEmail,
+            validator: (value) => Validator.validateEmail(
+              email: value!,
+            ),
             cursorColor: kPrimaryColor,
-            onSaved: (email) {},
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: "Email",
               prefixIcon: Padding(
-                padding: const EdgeInsets.all(defaultPadding),
+                padding: EdgeInsets.all(defaultPadding),
                 child: Icon(Icons.person),
               ),
             ),
@@ -47,10 +71,15 @@ class SignUpForm extends StatelessWidget {
               textInputAction: TextInputAction.done,
               obscureText: true,
               cursorColor: kPrimaryColor,
-              decoration: InputDecoration(
+              controller: _passwordTextController,
+              focusNode: _focusPassword,
+              validator: (value) => Validator.validatePassword(
+                password: value!,
+              ),
+              decoration: const InputDecoration(
                 hintText: "Password",
                 prefixIcon: Padding(
-                  padding: const EdgeInsets.all(defaultPadding),
+                  padding: EdgeInsets.all(defaultPadding),
                   child: Icon(Icons.lock),
                 ),
               ),
@@ -58,7 +87,24 @@ class SignUpForm extends StatelessWidget {
           ),
           const SizedBox(height: defaultPadding / 2),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                User? user = await FireAuth.registerUsingEmailPassword(
+                  name: _nameTextController.text,
+                  email: _emailTextController.text,
+                  password: _passwordTextController.text,
+                );
+                await user!.updateDisplayName(_nameTextController.text);
+                if (user != null) {
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => ProfileApp(),
+                    ),
+                    ModalRoute.withName('/'),
+                  );
+                }
+              }
+            },
             child: Text("Sign Up".toUpperCase()),
           ),
           const SizedBox(height: defaultPadding),
@@ -69,7 +115,7 @@ class SignUpForm extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return LoginScreen();
+                    return const LoginScreen();
                   },
                 ),
               );

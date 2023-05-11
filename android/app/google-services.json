@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "206393762195",
+    "project_id": "globalgamestore-4358c",
+    "storage_bucket": "globalgamestore-4358c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:206393762195:android:fea6d464b8264aee580866",
+        "android_client_info": {
+          "package_name": "com.example.globalgamestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "206393762195-rgq87helb48827dpt6mkma8hetbgfo9q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANc7pbvTRNW8v6o4lyAXS8cHsLCnaNcwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "206393762195-rgq87helb48827dpt6mkma8hetbgfo9q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

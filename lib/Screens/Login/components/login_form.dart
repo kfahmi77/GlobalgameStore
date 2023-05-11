@@ -1,26 +1,50 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:globalgamestore/navigation/navigation.dart';
+import 'package:globalgamestore/profile/profile.dart';
 
 import '../../../components/already_have_an_account_acheck.dart';
 import '../../../constants.dart';
+import '../../Signup/components/validator.dart';
+import '../../Signup/services/sign_up_services.dart';
 import '../../Signup/signup_screen.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   const LoginForm({
     Key? key,
   }) : super(key: key);
 
   @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  final _formKey = GlobalKey<FormState>();
+
+  final _emailTextController = TextEditingController();
+  final _passwordTextController = TextEditingController();
+
+  final _focusEmail = FocusNode();
+  final _focusPassword = FocusNode();
+
+  bool _isProcessing = false;
+  @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           TextFormField(
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
+            controller: _emailTextController,
+            focusNode: _focusEmail,
+            validator: (value) => Validator.validateEmail(
+              email: value!,
+            ),
             decoration: InputDecoration(
-              hintText: "Username",
+              hintText: "Email;",
               prefixIcon: Padding(
                 padding: const EdgeInsets.all(defaultPadding),
                 child: Icon(Icons.person),
@@ -33,6 +57,11 @@ class LoginForm extends StatelessWidget {
               textInputAction: TextInputAction.done,
               obscureText: true,
               cursorColor: kPrimaryColor,
+              controller: _passwordTextController,
+              focusNode: _focusPassword,
+              validator: (value) => Validator.validatePassword(
+                password: value!,
+              ),
               decoration: InputDecoration(
                 hintText: "Password",
                 prefixIcon: Padding(
@@ -47,15 +76,29 @@ class LoginForm extends StatelessWidget {
             tag: "login_btn",
             child: ElevatedButton(
               // onPressed: () {},
-              onPressed: () {
-                Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) {
-                    return NavAppBar();
-                  },
-                ),
-              );
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  setState(() {
+                    _isProcessing = true;
+                  });
+
+                  User? user = await FireAuth.signInUsingEmailPassword(
+                    email: _emailTextController.text,
+                    password: _passwordTextController.text,
+                  );
+
+                  setState(() {
+                    _isProcessing = false;
+                  });
+
+                  if (user != null) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => ProfileApp(),
+                      ),
+                    );
+                  }
+                }
               },
               child: Text(
                 "Login".toUpperCase(),
