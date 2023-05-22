@@ -1,18 +1,28 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:globalgamestore/Screens/Signup/services/sign_up_services.dart';
 import 'package:globalgamestore/profile/seller/store.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as path;
 
 const List<String> listDevice = <String>['Pc', 'Mobile'];
-const List<String> listGameCategory = <String>['Pubg Mobile', 'Pubg Pc', 'Dota', 'Mobile Lagends'];
+const List<String> listGameCategory = <String>[
+  'Pubg Mobile',
+  'Pubg Pc',
+  'Dota',
+  'Mobile Lagends'
+];
 
 class AddProductApp extends StatelessWidget {
   const AddProductApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AddProduct();
+    return const AddProduct();
   }
 }
 
@@ -24,21 +34,61 @@ class AddProduct extends StatefulWidget {
 }
 
 class _AddProductState extends State<AddProduct> {
-
+  final _firestore = FirebaseFirestore.instance;
+  final User? _user = FirebaseAuth.instance.currentUser;
+  TextEditingController namaProduct = TextEditingController();
+  TextEditingController hargaProduct = TextEditingController();
+  String selectedValue = '';
+  String selectedValue2 = '';
   File? image;
 
-  Future GetImage() async {
+  Future<void> uploadImageAndSaveData() async {
+    if (image != null) {
+      // Create a unique filename for the image
+      String fileName = '${DateTime.now().millisecondsSinceEpoch}$_user.jpg';
+
+      // Reference to the Firebase Storage location
+      firebase_storage.Reference storageReference = firebase_storage
+          .FirebaseStorage.instance
+          .ref()
+          .child('images')
+          .child(fileName);
+
+      // Upload the image to Firebase Storage
+      await storageReference.putFile(image!);
+
+      // Get the download URL of the uploaded image
+      String downloadURL = await storageReference.getDownloadURL();
+
+      // Save the download URL to Firestore
+      await _firestore.collection('product').add({
+        'nama_produk': namaProduct.text,
+        'harga_produk': hargaProduct.text,
+        'kategori_produk': selectedValue,
+        'kategori_game': selectedValue2,
+        'image_url': downloadURL,
+        'user_id': _user!.uid,
+      });
+
+      debugPrint("Data Added");
+    } else {
+      debugPrint("Image not selected");
+    }
+  }
+
+  Future<void> GetImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? ImagePicked = await picker.pickImage(source: ImageSource.gallery);
-    image = File(ImagePicked!.path);
-    setState(() {
-      
-    });
+    final XFile? ImagePicked =
+        await picker.pickImage(source: ImageSource.gallery);
+    if (ImagePicked != null) {
+      setState(() {
+        image = File(ImagePicked.path);
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-
     final mediaQueryHeight = MediaQuery.of(context).size.height;
     final mediaQueryWidth = MediaQuery.of(context).size.width;
 
@@ -46,171 +96,167 @@ class _AddProductState extends State<AddProduct> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Tambah Produk',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w400
+            title: const Text(
+              'Tambah Produk',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400),
             ),
-          ),
-          // backgroundColor: Colors.white,
-          backgroundColor: Color(0xFFEE4532),
-          leading: Container(
-            child: InkWell(
-              child: Icon(
-                Icons.arrow_back_outlined,
-                size: 28,
-                color: Colors.white,
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
+            // backgroundColor: Colors.white,
+            backgroundColor: const Color(0xFFEE4532),
+            leading: Container(
+              child: InkWell(
+                child: const Icon(
+                  Icons.arrow_back_outlined,
+                  size: 28,
+                  color: Colors.white,
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return StoreApp();
+                        return const StoreApp();
                       },
                     ),
-                );
-              },
-            ),
-          )
-        ),
-        body: Container(
+                  );
+                },
+              ),
+            )),
+        body: SizedBox(
           width: mediaQueryWidth,
           height: mediaQueryHeight,
           // color: Color.fromARGB(255, 224, 224, 224),
           child: Center(
-            child: Container(
+            child: SizedBox(
               width: mediaQueryWidth * 0.8,
               height: mediaQueryHeight * 0.8,
               // color: Colors.white,
               child: Column(
                 children: [
-                  Container(
+                  SizedBox(
                     width: mediaQueryWidth * 0.8,
                     height: mediaQueryHeight * 0.04,
                     // color: Colors.red,
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
                         width: mediaQueryWidth * 0.8,
                         height: mediaQueryHeight * 0.02,
                         // color: Colors.amber,
-                        child: Text('Nama Produk :'),
+                        child: const Text('Nama Produk :'),
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: mediaQueryWidth * 0.8,
                     height: mediaQueryHeight * 0.04,
                     // color: Colors.red,
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
+                        width: mediaQueryWidth * 0.8,
+                        height: mediaQueryHeight * 0.035,
+                        // color: Colors.amber,
+                        child: TextField(
+                          controller: namaProduct,
+                          textAlignVertical: TextAlignVertical.bottom,
+                          decoration: const InputDecoration(
+                            hintText: 'Nama Produk',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10)),
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                                width: 1.5,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                  bottomRight: Radius.circular(5)),
+                              borderSide: BorderSide(
+                                color: Color(0xFFEE4532),
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: mediaQueryWidth * 0.8,
+                    height: mediaQueryHeight * 0.04,
+                    // color: Colors.red,
+                    child: Center(
+                      child: SizedBox(
+                        width: mediaQueryWidth * 0.8,
+                        height: mediaQueryHeight * 0.02,
+                        // color: Colors.amber,
+                        child: const Text('Harga Produk :'),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: mediaQueryWidth * 0.8,
+                    height: mediaQueryHeight * 0.04,
+                    // color: Colors.red,
+                    child: Center(
+                      child: SizedBox(
                         width: mediaQueryWidth * 0.8,
                         height: mediaQueryHeight * 0.035,
                         // color: Colors.amber,
                         child: TextField(
                           textAlignVertical: TextAlignVertical.bottom,
-                          decoration: InputDecoration(
-                              hintText: 'Nama Produk',
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
+                          controller: hargaProduct,
+                          decoration: const InputDecoration(
+                            hintText: 'Harga Produk',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   topRight: Radius.circular(10),
                                   bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10)
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                  width: 1.5,
-                                ),
-                              ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                  bottomRight: Radius.circular(5)
-                              ),
-                                borderSide: BorderSide(
-                                  color: Color(0xFFEE4532),
-                                  width: 1.5,
-                                ),
+                                  bottomRight: Radius.circular(10)),
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                                width: 1.5,
                               ),
                             ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                  bottomRight: Radius.circular(5)),
+                              borderSide: BorderSide(
+                                color: Color(0xFFEE4532),
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: mediaQueryWidth * 0.8,
                     height: mediaQueryHeight * 0.04,
                     // color: Colors.red,
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
                         width: mediaQueryWidth * 0.8,
                         height: mediaQueryHeight * 0.02,
                         // color: Colors.amber,
-                        child: Text('Harga Produk :'),
+                        child: const Text('Tipe Produk :'),
                       ),
                     ),
                   ),
-                  Container(
-                    width: mediaQueryWidth * 0.8,
-                    height: mediaQueryHeight * 0.04,
-                    // color: Colors.red,
-                    child: Center(
-                      child: Container(
-                        width: mediaQueryWidth * 0.8,
-                        height: mediaQueryHeight * 0.035,
-                        // color: Colors.amber,
-                        child: TextField(
-                          textAlignVertical: TextAlignVertical.bottom,
-                          decoration: InputDecoration(
-                              hintText: 'Harga Produk',
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10)
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                  width: 1.5,
-                                ),
-                              ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                  bottomRight: Radius.circular(5)
-                              ),
-                                borderSide: BorderSide(
-                                  color: Color(0xFFEE4532),
-                                  width: 1.5,
-                                ),
-                              ),
-                            ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: mediaQueryWidth * 0.8,
-                    height: mediaQueryHeight * 0.04,
-                    // color: Colors.red,
-                    child: Center(
-                      child: Container(
-                        width: mediaQueryWidth * 0.8,
-                        height: mediaQueryHeight * 0.02,
-                        // color: Colors.amber,
-                        child: Text('Tipe Produk :'),
-                      ),
-                    ),
-                  ),
-                  Container(
+                  SizedBox(
                     width: mediaQueryWidth * 0.8,
                     height: mediaQueryHeight * 0.04,
                     // color: Colors.red,
@@ -219,28 +265,31 @@ class _AddProductState extends State<AddProduct> {
                         width: mediaQueryWidth * 0.8,
                         height: mediaQueryHeight * 0.04,
                         decoration: BoxDecoration(
-                        // color: Colors.amber,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Color(0xFFEE4532),
-                          )
-                        ),
+                            // color: Colors.amber,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: const Color(0xFFEE4532),
+                            )),
                         child: Row(
                           children: [
                             Container(
                               width: mediaQueryWidth * 0.7,
                               height: mediaQueryHeight * 0.04,
                               // color: Colors.red,
-                              padding: EdgeInsets.only(
-                                left: 10
+                              padding: const EdgeInsets.only(left: 10),
+                              child: TypePrducts(
+                                onSelectValue: (String _selectedValue) {
+                                  setState(() {
+                                    selectedValue = _selectedValue;
+                                  });
+                                },
                               ),
-                              child: TypePrducts(),
                             ),
-                            Container(
+                            SizedBox(
                               width: mediaQueryWidth * 0.08,
                               height: mediaQueryHeight * 0.04,
                               // color: Colors.green,
-                              child: Center(
+                              child: const Center(
                                 child: Icon(Icons.keyboard_arrow_down),
                               ),
                             )
@@ -249,20 +298,20 @@ class _AddProductState extends State<AddProduct> {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: mediaQueryWidth * 0.8,
                     height: mediaQueryHeight * 0.04,
                     // color: Colors.red,
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
                         width: mediaQueryWidth * 0.8,
                         height: mediaQueryHeight * 0.02,
                         // color: Colors.amber,
-                        child: Text('Kategory Game :'),
+                        child: const Text('Kategory Game :'),
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: mediaQueryWidth * 0.8,
                     height: mediaQueryHeight * 0.04,
                     // color: Colors.red,
@@ -271,28 +320,31 @@ class _AddProductState extends State<AddProduct> {
                         width: mediaQueryWidth * 0.8,
                         height: mediaQueryHeight * 0.04,
                         decoration: BoxDecoration(
-                        // color: Colors.amber,
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(
-                            color: Color(0xFFEE4532),
-                          )
-                        ),
+                            // color: Colors.amber,
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(
+                              color: const Color(0xFFEE4532),
+                            )),
                         child: Row(
                           children: [
                             Container(
                               width: mediaQueryWidth * 0.7,
                               height: mediaQueryHeight * 0.04,
                               // color: Colors.red,
-                              padding: EdgeInsets.only(
-                                left: 10
+                              padding: const EdgeInsets.only(left: 10),
+                              child: CategoryGames(
+                                onSelectValue2: (String _selectedValue) {
+                                  setState(() {
+                                    selectedValue2 = _selectedValue;
+                                  });
+                                },
                               ),
-                              child: CategoryGames(),
                             ),
-                            Container(
+                            SizedBox(
                               width: mediaQueryWidth * 0.08,
                               height: mediaQueryHeight * 0.04,
                               // color: Colors.green,
-                              child: Center(
+                              child: const Center(
                                 child: Icon(Icons.keyboard_arrow_down),
                               ),
                             )
@@ -301,71 +353,69 @@ class _AddProductState extends State<AddProduct> {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: mediaQueryWidth * 0.8,
                     height: mediaQueryHeight * 0.04,
                     // color: Colors.red,
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
                         width: mediaQueryWidth * 0.8,
                         height: mediaQueryHeight * 0.02,
                         // color: Colors.amber,
-                        child: Text('Deskripsi Produk :'),
+                        child: const Text('Deskripsi Produk :'),
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: mediaQueryWidth * 0.8,
                     height: mediaQueryHeight * 0.04,
                     // color: Colors.red,
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
                         width: mediaQueryWidth * 0.8,
                         height: mediaQueryHeight * 0.035,
                         // color: Colors.amber,
-                        child: TextField(
+                        child: const TextField(
                           textAlignVertical: TextAlignVertical.bottom,
                           decoration: InputDecoration(
-                              hintText: '....',
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.only(
+                            hintText: '....',
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   topRight: Radius.circular(10),
                                   bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10)
-                                ),
-                                borderSide: BorderSide(
-                                  color: Colors.grey,
-                                  width: 1.5,
-                                ),
-                              ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                  bottomRight: Radius.circular(5)
-                              ),
-                                borderSide: BorderSide(
-                                  color: Color(0xFFEE4532),
-                                  width: 1.5,
-                                ),
+                                  bottomRight: Radius.circular(10)),
+                              borderSide: BorderSide(
+                                color: Colors.grey,
+                                width: 1.5,
                               ),
                             ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5),
+                                  bottomLeft: Radius.circular(5),
+                                  bottomRight: Radius.circular(5)),
+                              borderSide: BorderSide(
+                                color: Color(0xFFEE4532),
+                                width: 1.5,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: mediaQueryWidth * 0.8,
                     height: mediaQueryHeight * 0.04,
                     // color: Colors.red,
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
                         width: mediaQueryWidth * 0.8,
                         height: mediaQueryHeight * 0.02,
                         // color: Colors.amber,
-                        child: Text('Images :'),
+                        child: const Text('Images :'),
                       ),
                     ),
                   ),
@@ -373,13 +423,29 @@ class _AddProductState extends State<AddProduct> {
                     width: mediaQueryWidth * 0.8,
                     height: mediaQueryHeight * 0.04,
                     color: Colors.red,
-                    child: image != null ? Container(height: 10, width: 10, child: Image.file(image!, fit: BoxFit.cover,)) : Container(),
+                    child: image != null
+                        ? SizedBox(
+                            height: 10,
+                            width: 10,
+                            child: Image.file(
+                              image!,
+                              fit: BoxFit.cover,
+                            ))
+                        : Container(),
                   ),
                   TextButton(
-                    onPressed: () async {
-                      await GetImage();
-                    },
-                    child: Text('Open')
+                      onPressed: () async {
+                        await GetImage();
+                      },
+                      child: const Text('Open')),
+                  Container(
+                    color: Colors.orange,
+                    width: 80,
+                    child: TextButton(
+                        onPressed: () async {
+                          await uploadImageAndSaveData();
+                        },
+                        child: const Text('Simpan')),
                   )
                 ],
               ),
@@ -392,7 +458,9 @@ class _AddProductState extends State<AddProduct> {
 }
 
 class TypePrducts extends StatefulWidget {
-  const TypePrducts({super.key});
+  const TypePrducts({Key? key, required this.onSelectValue}) : super(key: key);
+
+  final Function(String) onSelectValue;
 
   @override
   State<TypePrducts> createState() => _TypePrductsState();
@@ -409,6 +477,7 @@ class _TypePrductsState extends State<TypePrducts> {
       onChanged: (String? value) {
         setState(() {
           dropdownValue = value!;
+          widget.onSelectValue(dropdownValue);
         });
       },
       items: listDevice.map<DropdownMenuItem<String>>((String value) {
@@ -422,7 +491,10 @@ class _TypePrductsState extends State<TypePrducts> {
 }
 
 class CategoryGames extends StatefulWidget {
-  const CategoryGames({super.key});
+  const CategoryGames({Key? key, required this.onSelectValue2})
+      : super(key: key);
+
+  final Function(String) onSelectValue2;
 
   @override
   State<CategoryGames> createState() => _CategoryGamesState();
@@ -439,6 +511,7 @@ class _CategoryGamesState extends State<CategoryGames> {
       onChanged: (String? value) {
         setState(() {
           dropdownValue = value!;
+          widget.onSelectValue2(dropdownValue);
         });
       },
       items: listGameCategory.map<DropdownMenuItem<String>>((String value) {
@@ -450,4 +523,3 @@ class _CategoryGamesState extends State<CategoryGames> {
     );
   }
 }
-
