@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:globalgamestore/home/home.dart';
 import 'package:globalgamestore/navigation/navigation.dart';
 
 class CartApp extends StatelessWidget {
@@ -7,7 +6,7 @@ class CartApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Cart();
+    return const Cart();
   }
 }
 
@@ -16,7 +15,6 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final mediaQueryHeight = MediaQuery.of(context).size.height;
     final mediaQueryWidth = MediaQuery.of(context).size.width;
 
@@ -24,39 +22,37 @@ class Cart extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
-            'Keranjang',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 25,
-              fontWeight: FontWeight.w400
+            title: const Text(
+              'Keranjang',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 25,
+                  fontWeight: FontWeight.w400),
             ),
-          ),
-          backgroundColor: Colors.white,
-          leading: Container(
-            child: InkWell(
-              child: Icon(
-                Icons.arrow_back_outlined,
-                size: 35,
-                color: Color(0xFFEE4532),
-              ),
-              onTap: () {
-                Navigator.push(
-                  context,
+            backgroundColor: Colors.white,
+            leading: Container(
+              child: InkWell(
+                child: const Icon(
+                  Icons.arrow_back_outlined,
+                  size: 35,
+                  color: Color(0xFFEE4532),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
                     MaterialPageRoute(
                       builder: (context) {
                         return NavAppBar();
                       },
                     ),
-                );
-              },
-            ),
-          )
-        ),
+                  );
+                },
+              ),
+            )),
         body: Container(
           height: mediaQueryHeight,
           width: mediaQueryWidth,
-          color: Color.fromARGB(255, 223, 223, 223),
+          color: const Color.fromARGB(255, 223, 223, 223),
           child: ListView(
             children: [
               Container(
@@ -69,14 +65,7 @@ class Cart extends StatelessWidget {
                       width: mediaQueryWidth * 0.4,
                       height: mediaQueryHeight * 0.2,
                       color: Colors.white,
-                      child: Center(
-                        child: FittedBox(
-                          fit: BoxFit.cover,
-                          child: Image.asset(
-                            'assets/images/Pubg1.png'
-                          ),
-                        ),
-                      ),
+                      child: const Center(),
                     ),
                     Container(
                       width: mediaQueryWidth * 0.6,
@@ -96,18 +85,17 @@ class Cart extends StatelessWidget {
                                   // color: Colors.green,
                                   child: Center(
                                     child: Container(
-                                      padding: EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: 15),
                                       width: mediaQueryWidth * 0.6,
                                       height: mediaQueryHeight * 0.04,
                                       // color: Colors.red,
-                                      child: Text(
+                                      child: const Text(
                                         'Pubg Mobile',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w300
-                                        ),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w300),
                                       ),
                                     ),
                                   ),
@@ -118,11 +106,11 @@ class Cart extends StatelessWidget {
                                   // color: Color.fromARGB(255, 76, 97, 175),
                                   child: Center(
                                     child: Container(
-                                      padding: EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: 15),
                                       width: mediaQueryWidth * 0.6,
                                       height: mediaQueryHeight * 0.04,
                                       // color: Colors.red,
-                                      child: Text(
+                                      child: const Text(
                                         'Rp128.000',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -153,17 +141,16 @@ class Cart extends StatelessWidget {
                                       width: mediaQueryWidth * 0.28,
                                       height: mediaQueryHeight * 0.05,
                                       decoration: BoxDecoration(
-                                      color: Color(0xFFEE4532),
-                                        borderRadius: BorderRadius.circular(5)
-                                      ),
-                                      child: Center(
+                                          color: const Color(0xFFEE4532),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
                                         child: Text(
                                           'Hapus',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -178,17 +165,16 @@ class Cart extends StatelessWidget {
                                       width: mediaQueryWidth * 0.28,
                                       height: mediaQueryHeight * 0.05,
                                       decoration: BoxDecoration(
-                                      color: Color(0xFFEE4532),
-                                        borderRadius: BorderRadius.circular(5)
-                                      ),
-                                      child: Center(
+                                          color: const Color(0xFFEE4532),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
                                         child: Text(
                                           'Checkout',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -203,7 +189,9 @@ class Cart extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
                 width: mediaQueryWidth,
                 height: mediaQueryHeight * 0.2,
@@ -217,9 +205,7 @@ class Cart extends StatelessWidget {
                       child: Center(
                         child: FittedBox(
                           fit: BoxFit.cover,
-                          child: Image.asset(
-                            'assets/images/Pubg1.png'
-                          ),
+                          child: Image.asset('assets/images/Pubg1.png'),
                         ),
                       ),
                     ),
@@ -241,18 +227,17 @@ class Cart extends StatelessWidget {
                                   // color: Colors.green,
                                   child: Center(
                                     child: Container(
-                                      padding: EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: 15),
                                       width: mediaQueryWidth * 0.6,
                                       height: mediaQueryHeight * 0.04,
                                       // color: Colors.red,
-                                      child: Text(
+                                      child: const Text(
                                         'Pubg Mobile',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w300
-                                        ),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w300),
                                       ),
                                     ),
                                   ),
@@ -263,11 +248,11 @@ class Cart extends StatelessWidget {
                                   // color: Color.fromARGB(255, 76, 97, 175),
                                   child: Center(
                                     child: Container(
-                                      padding: EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: 15),
                                       width: mediaQueryWidth * 0.6,
                                       height: mediaQueryHeight * 0.04,
                                       // color: Colors.red,
-                                      child: Text(
+                                      child: const Text(
                                         'Rp128.000',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -298,17 +283,16 @@ class Cart extends StatelessWidget {
                                       width: mediaQueryWidth * 0.28,
                                       height: mediaQueryHeight * 0.05,
                                       decoration: BoxDecoration(
-                                      color: Color(0xFFEE4532),
-                                        borderRadius: BorderRadius.circular(5)
-                                      ),
-                                      child: Center(
+                                          color: const Color(0xFFEE4532),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
                                         child: Text(
                                           'Hapus',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -323,17 +307,16 @@ class Cart extends StatelessWidget {
                                       width: mediaQueryWidth * 0.28,
                                       height: mediaQueryHeight * 0.05,
                                       decoration: BoxDecoration(
-                                      color: Color(0xFFEE4532),
-                                        borderRadius: BorderRadius.circular(5)
-                                      ),
-                                      child: Center(
+                                          color: const Color(0xFFEE4532),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
                                         child: Text(
                                           'Checkout',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -348,7 +331,9 @@ class Cart extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
                 width: mediaQueryWidth,
                 height: mediaQueryHeight * 0.2,
@@ -362,9 +347,7 @@ class Cart extends StatelessWidget {
                       child: Center(
                         child: FittedBox(
                           fit: BoxFit.cover,
-                          child: Image.asset(
-                            'assets/images/Pubg1.png'
-                          ),
+                          child: Image.asset('assets/images/Pubg1.png'),
                         ),
                       ),
                     ),
@@ -386,18 +369,17 @@ class Cart extends StatelessWidget {
                                   // color: Colors.green,
                                   child: Center(
                                     child: Container(
-                                      padding: EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: 15),
                                       width: mediaQueryWidth * 0.6,
                                       height: mediaQueryHeight * 0.04,
                                       // color: Colors.red,
-                                      child: Text(
+                                      child: const Text(
                                         'Pubg Mobile',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w300
-                                        ),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w300),
                                       ),
                                     ),
                                   ),
@@ -408,11 +390,11 @@ class Cart extends StatelessWidget {
                                   // color: Color.fromARGB(255, 76, 97, 175),
                                   child: Center(
                                     child: Container(
-                                      padding: EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: 15),
                                       width: mediaQueryWidth * 0.6,
                                       height: mediaQueryHeight * 0.04,
                                       // color: Colors.red,
-                                      child: Text(
+                                      child: const Text(
                                         'Rp128.000',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -443,17 +425,16 @@ class Cart extends StatelessWidget {
                                       width: mediaQueryWidth * 0.28,
                                       height: mediaQueryHeight * 0.05,
                                       decoration: BoxDecoration(
-                                      color: Color(0xFFEE4532),
-                                        borderRadius: BorderRadius.circular(5)
-                                      ),
-                                      child: Center(
+                                          color: const Color(0xFFEE4532),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
                                         child: Text(
                                           'Hapus',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -468,17 +449,16 @@ class Cart extends StatelessWidget {
                                       width: mediaQueryWidth * 0.28,
                                       height: mediaQueryHeight * 0.05,
                                       decoration: BoxDecoration(
-                                      color: Color(0xFFEE4532),
-                                        borderRadius: BorderRadius.circular(5)
-                                      ),
-                                      child: Center(
+                                          color: const Color(0xFFEE4532),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
                                         child: Text(
                                           'Checkout',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -493,7 +473,9 @@ class Cart extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
                 width: mediaQueryWidth,
                 height: mediaQueryHeight * 0.2,
@@ -507,9 +489,7 @@ class Cart extends StatelessWidget {
                       child: Center(
                         child: FittedBox(
                           fit: BoxFit.cover,
-                          child: Image.asset(
-                            'assets/images/Pubg1.png'
-                          ),
+                          child: Image.asset('assets/images/Pubg1.png'),
                         ),
                       ),
                     ),
@@ -531,18 +511,17 @@ class Cart extends StatelessWidget {
                                   // color: Colors.green,
                                   child: Center(
                                     child: Container(
-                                      padding: EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: 15),
                                       width: mediaQueryWidth * 0.6,
                                       height: mediaQueryHeight * 0.04,
                                       // color: Colors.red,
-                                      child: Text(
+                                      child: const Text(
                                         'Pubg Mobile',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w300
-                                        ),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w300),
                                       ),
                                     ),
                                   ),
@@ -553,11 +532,11 @@ class Cart extends StatelessWidget {
                                   // color: Color.fromARGB(255, 76, 97, 175),
                                   child: Center(
                                     child: Container(
-                                      padding: EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: 15),
                                       width: mediaQueryWidth * 0.6,
                                       height: mediaQueryHeight * 0.04,
                                       // color: Colors.red,
-                                      child: Text(
+                                      child: const Text(
                                         'Rp128.000',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -588,17 +567,16 @@ class Cart extends StatelessWidget {
                                       width: mediaQueryWidth * 0.28,
                                       height: mediaQueryHeight * 0.05,
                                       decoration: BoxDecoration(
-                                      color: Color(0xFFEE4532),
-                                        borderRadius: BorderRadius.circular(5)
-                                      ),
-                                      child: Center(
+                                          color: const Color(0xFFEE4532),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
                                         child: Text(
                                           'Hapus',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -613,17 +591,16 @@ class Cart extends StatelessWidget {
                                       width: mediaQueryWidth * 0.28,
                                       height: mediaQueryHeight * 0.05,
                                       decoration: BoxDecoration(
-                                      color: Color(0xFFEE4532),
-                                        borderRadius: BorderRadius.circular(5)
-                                      ),
-                                      child: Center(
+                                          color: const Color(0xFFEE4532),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
                                         child: Text(
                                           'Checkout',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -638,7 +615,9 @@ class Cart extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
                 width: mediaQueryWidth,
                 height: mediaQueryHeight * 0.2,
@@ -652,9 +631,7 @@ class Cart extends StatelessWidget {
                       child: Center(
                         child: FittedBox(
                           fit: BoxFit.cover,
-                          child: Image.asset(
-                            'assets/images/Pubg1.png'
-                          ),
+                          child: Image.asset('assets/images/Pubg1.png'),
                         ),
                       ),
                     ),
@@ -676,18 +653,17 @@ class Cart extends StatelessWidget {
                                   // color: Colors.green,
                                   child: Center(
                                     child: Container(
-                                      padding: EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: 15),
                                       width: mediaQueryWidth * 0.6,
                                       height: mediaQueryHeight * 0.04,
                                       // color: Colors.red,
-                                      child: Text(
+                                      child: const Text(
                                         'Pubg Mobile',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
                                         style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w300
-                                        ),
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w300),
                                       ),
                                     ),
                                   ),
@@ -698,11 +674,11 @@ class Cart extends StatelessWidget {
                                   // color: Color.fromARGB(255, 76, 97, 175),
                                   child: Center(
                                     child: Container(
-                                      padding: EdgeInsets.only(left: 15),
+                                      padding: const EdgeInsets.only(left: 15),
                                       width: mediaQueryWidth * 0.6,
                                       height: mediaQueryHeight * 0.04,
                                       // color: Colors.red,
-                                      child: Text(
+                                      child: const Text(
                                         'Rp128.000',
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
@@ -733,17 +709,16 @@ class Cart extends StatelessWidget {
                                       width: mediaQueryWidth * 0.28,
                                       height: mediaQueryHeight * 0.05,
                                       decoration: BoxDecoration(
-                                      color: Color(0xFFEE4532),
-                                        borderRadius: BorderRadius.circular(5)
-                                      ),
-                                      child: Center(
+                                          color: const Color(0xFFEE4532),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
                                         child: Text(
                                           'Hapus',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),
@@ -758,17 +733,16 @@ class Cart extends StatelessWidget {
                                       width: mediaQueryWidth * 0.28,
                                       height: mediaQueryHeight * 0.05,
                                       decoration: BoxDecoration(
-                                      color: Color(0xFFEE4532),
-                                        borderRadius: BorderRadius.circular(5)
-                                      ),
-                                      child: Center(
+                                          color: const Color(0xFFEE4532),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: const Center(
                                         child: Text(
                                           'Checkout',
                                           style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.white
-                                          ),
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.white),
                                         ),
                                       ),
                                     ),

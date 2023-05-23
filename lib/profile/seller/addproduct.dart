@@ -3,11 +3,12 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:globalgamestore/Screens/Signup/services/sign_up_services.dart';
 import 'package:globalgamestore/profile/seller/store.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:path/path.dart' as path;
+
+import '../../home/home.dart';
+import '../../navigation/navigation.dart';
 
 const List<String> listDevice = <String>['Pc', 'Mobile'];
 const List<String> listGameCategory = <String>[
@@ -38,6 +39,7 @@ class _AddProductState extends State<AddProduct> {
   final User? _user = FirebaseAuth.instance.currentUser;
   TextEditingController namaProduct = TextEditingController();
   TextEditingController hargaProduct = TextEditingController();
+  TextEditingController deskripsiProduct = TextEditingController();
   String selectedValue = '';
   String selectedValue2 = '';
   File? image;
@@ -67,13 +69,41 @@ class _AddProductState extends State<AddProduct> {
         'kategori_produk': selectedValue,
         'kategori_game': selectedValue2,
         'image_url': downloadURL,
+        'deskripsi_produk': deskripsiProduct.text,
         'user_id': _user!.uid,
       });
+      // ignore: use_build_context_synchronously
+      showSuccessDialog(context);
 
       debugPrint("Data Added");
     } else {
       debugPrint("Image not selected");
     }
+  }
+
+  void showSuccessDialog(
+    BuildContext context,
+  ) {
+    showDialog(
+      context: context,
+      builder: (BuildContext dialogContext) {
+        return AlertDialog(
+          title: Text('Sukses'),
+          content: Text('Data berhasil ditambahkan.'),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.pushReplacement(
+                  dialogContext,
+                  MaterialPageRoute(builder: (context) => NavAppBar()),
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> GetImage() async {
