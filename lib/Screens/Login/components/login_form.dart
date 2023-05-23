@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:globalgamestore/navigation/navigation.dart';
 import 'package:globalgamestore/profile/profile.dart';
 
 import '../../../components/already_have_an_account_acheck.dart';
@@ -27,7 +26,6 @@ class _LoginFormState extends State<LoginForm> {
   final _focusEmail = FocusNode();
   final _focusPassword = FocusNode();
 
-  bool _isProcessing = false;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -43,10 +41,10 @@ class _LoginFormState extends State<LoginForm> {
             validator: (value) => Validator.validateEmail(
               email: value!,
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: "Email;",
               prefixIcon: Padding(
-                padding: const EdgeInsets.all(defaultPadding),
+                padding: EdgeInsets.all(defaultPadding),
                 child: Icon(Icons.person),
               ),
             ),
@@ -62,10 +60,10 @@ class _LoginFormState extends State<LoginForm> {
               validator: (value) => Validator.validatePassword(
                 password: value!,
               ),
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Password",
                 prefixIcon: Padding(
-                  padding: const EdgeInsets.all(defaultPadding),
+                  padding: EdgeInsets.all(defaultPadding),
                   child: Icon(Icons.lock),
                 ),
               ),
@@ -79,7 +77,6 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   setState(() {
-                    _isProcessing = true;
                   });
 
                   User? user = await FireAuth.signInUsingEmailPassword(
@@ -88,13 +85,12 @@ class _LoginFormState extends State<LoginForm> {
                   );
 
                   setState(() {
-                    _isProcessing = false;
                   });
 
                   if (user != null) {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
-                        builder: (context) => ProfileApp(),
+                        builder: (context) => const ProfileApp(),
                       ),
                     );
                   }
@@ -112,7 +108,7 @@ class _LoginFormState extends State<LoginForm> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return SignUpScreen();
+                    return const SignUpScreen();
                   },
                 ),
               );

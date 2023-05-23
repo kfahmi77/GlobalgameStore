@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:globalgamestore/Screens/Welcome/welcome_screen.dart';
 import 'package:globalgamestore/home/balance/balance.dart';
-import 'package:globalgamestore/navigation/navigation.dart';
 import 'package:globalgamestore/profile/pesanan/pesanan.dart';
 import 'package:globalgamestore/profile/seller/store.dart';
 

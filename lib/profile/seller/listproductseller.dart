@@ -17,14 +17,16 @@ class ListProductsSellerApp extends StatelessWidget {
 class ListProdutsSeller extends StatelessWidget {
   // const Pesanan({super.key});
   // DefaultTabController myController = DefaultTabController(length: 2, child: null);
-  List<Tab> myTab = [
-    Tab(text: 'Daftar Produk',),
-    Tab(text: 'Dalam Proses',),
-    Tab(text: 'Selesai',),
-  ];
+
+
+  ListProdutsSeller({super.key});
   @override
   Widget build(BuildContext context) {
-
+  List<Tab> myTab = [
+    const Tab(text: 'Daftar Produk',),
+    const Tab(text: 'Dalam Proses',),
+    const Tab(text: 'Selesai',),
+  ];
     final mediaQueryHeight = MediaQuery.of(context).size.height;
     final mediaQueryWidth = MediaQuery.of(context).size.width;
 
@@ -34,7 +36,7 @@ class ListProdutsSeller extends StatelessWidget {
         length: myTab.length,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(
+            title: const Text(
               'Daftar Produk Saya',
               style: TextStyle(
                 color: Colors.black,
@@ -44,14 +46,14 @@ class ListProdutsSeller extends StatelessWidget {
             ),
             bottom: TabBar(
               tabs: myTab,
-              indicatorColor: Color(0xFFEE4532),
+              indicatorColor: const Color(0xFFEE4532),
               unselectedLabelColor: Colors.black,
-              labelColor: Color(0xFFEE4532),
+              labelColor: const Color(0xFFEE4532),
             ),
             backgroundColor: Colors.white,
             leading: Container(
               child: InkWell(
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_outlined,
                   size: 32,
                   color: Color(0xFFEE4532),
@@ -61,7 +63,7 @@ class ListProdutsSeller extends StatelessWidget {
                     context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return ProfileApp();
+                          return const ProfileApp();
                         },
                       ),
                   );
@@ -77,7 +79,7 @@ class ListProdutsSeller extends StatelessWidget {
               Container(
                 height: mediaQueryHeight,
                 width: mediaQueryWidth,
-                color: Color.fromARGB(255, 223, 223, 223),
+                color: const Color.fromARGB(255, 223, 223, 223),
                 child: ListView(
                   children: [
                     InkWell(
@@ -118,11 +120,11 @@ class ListProdutsSeller extends StatelessWidget {
                                           // color: Colors.green,
                                           child: Center(
                                             child: Container(
-                                              padding: EdgeInsets.only(left: 15),
+                                              padding: const EdgeInsets.only(left: 15),
                                               width: mediaQueryWidth * 0.6,
                                               height: mediaQueryHeight * 0.04,
                                               // color: Colors.red,
-                                              child: Text(
+                                              child: const Text(
                                                 'Pubg Mobile',
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
@@ -140,11 +142,11 @@ class ListProdutsSeller extends StatelessWidget {
                                           // color: Color.fromARGB(255, 76, 97, 175),
                                           child: Center(
                                             child: Container(
-                                              padding: EdgeInsets.only(left: 15),
+                                              padding: const EdgeInsets.only(left: 15),
                                               width: mediaQueryWidth * 0.6,
                                               height: mediaQueryHeight * 0.04,
                                               // color: Colors.red,
-                                              child: Text(
+                                              child: const Text(
                                                 'Rp128.000',
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
@@ -175,10 +177,10 @@ class ListProdutsSeller extends StatelessWidget {
                                               width: mediaQueryWidth * 0.28,
                                               height: mediaQueryHeight * 0.05,
                                               decoration: BoxDecoration(
-                                              color: Color(0xFFEE4532),
+                                              color: const Color(0xFFEE4532),
                                                 borderRadius: BorderRadius.circular(5)
                                               ),
-                                              child: Center(
+                                              child: const Center(
                                                 child: Text(
                                                   'Hapus',
                                                   style: TextStyle(
@@ -200,10 +202,10 @@ class ListProdutsSeller extends StatelessWidget {
                                               width: mediaQueryWidth * 0.28,
                                               height: mediaQueryHeight * 0.05,
                                               decoration: BoxDecoration(
-                                              color: Color(0xFFEE4532),
+                                              color: const Color(0xFFEE4532),
                                                 borderRadius: BorderRadius.circular(5)
                                               ),
-                                              child: Center(
+                                              child: const Center(
                                                 child: Text(
                                                   'Edit',
                                                   style: TextStyle(
@@ -230,13 +232,13 @@ class ListProdutsSeller extends StatelessWidget {
                           context,
                             MaterialPageRoute(
                               builder: (context) {
-                                return ViewDetailProductSellerApp();
+                                return const ViewDetailProductSellerApp();
                               },
                             ),
                         );
                       },
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     Container(
                       width: mediaQueryWidth,
                       height: mediaQueryHeight * 0.2,
@@ -274,11 +276,11 @@ class ListProdutsSeller extends StatelessWidget {
                                         // color: Colors.green,
                                         child: Center(
                                           child: Container(
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding: const EdgeInsets.only(left: 15),
                                             width: mediaQueryWidth * 0.6,
                                             height: mediaQueryHeight * 0.04,
                                             // color: Colors.red,
-                                            child: Text(
+                                            child: const Text(
                                               'Pubg Mobile',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
@@ -296,11 +298,11 @@ class ListProdutsSeller extends StatelessWidget {
                                         // color: Color.fromARGB(255, 76, 97, 175),
                                         child: Center(
                                           child: Container(
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding: const EdgeInsets.only(left: 15),
                                             width: mediaQueryWidth * 0.6,
                                             height: mediaQueryHeight * 0.04,
                                             // color: Colors.red,
-                                            child: Text(
+                                            child: const Text(
                                               'Rp128.000',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
@@ -331,10 +333,10 @@ class ListProdutsSeller extends StatelessWidget {
                                             width: mediaQueryWidth * 0.28,
                                             height: mediaQueryHeight * 0.05,
                                             decoration: BoxDecoration(
-                                            color: Color(0xFFEE4532),
+                                            color: const Color(0xFFEE4532),
                                               borderRadius: BorderRadius.circular(5)
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text(
                                                 'Hapus',
                                                 style: TextStyle(
@@ -356,10 +358,10 @@ class ListProdutsSeller extends StatelessWidget {
                                             width: mediaQueryWidth * 0.28,
                                             height: mediaQueryHeight * 0.05,
                                             decoration: BoxDecoration(
-                                            color: Color(0xFFEE4532),
+                                            color: const Color(0xFFEE4532),
                                               borderRadius: BorderRadius.circular(5)
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text(
                                                 'Edit',
                                                 style: TextStyle(
@@ -381,7 +383,7 @@ class ListProdutsSeller extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     Container(
                       width: mediaQueryWidth,
                       height: mediaQueryHeight * 0.2,
@@ -419,11 +421,11 @@ class ListProdutsSeller extends StatelessWidget {
                                         // color: Colors.green,
                                         child: Center(
                                           child: Container(
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding: const EdgeInsets.only(left: 15),
                                             width: mediaQueryWidth * 0.6,
                                             height: mediaQueryHeight * 0.04,
                                             // color: Colors.red,
-                                            child: Text(
+                                            child: const Text(
                                               'Pubg Mobile',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
@@ -441,11 +443,11 @@ class ListProdutsSeller extends StatelessWidget {
                                         // color: Color.fromARGB(255, 76, 97, 175),
                                         child: Center(
                                           child: Container(
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding: const EdgeInsets.only(left: 15),
                                             width: mediaQueryWidth * 0.6,
                                             height: mediaQueryHeight * 0.04,
                                             // color: Colors.red,
-                                            child: Text(
+                                            child: const Text(
                                               'Rp128.000',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
@@ -476,10 +478,10 @@ class ListProdutsSeller extends StatelessWidget {
                                             width: mediaQueryWidth * 0.28,
                                             height: mediaQueryHeight * 0.05,
                                             decoration: BoxDecoration(
-                                            color: Color(0xFFEE4532),
+                                            color: const Color(0xFFEE4532),
                                               borderRadius: BorderRadius.circular(5)
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text(
                                                 'Hapus',
                                                 style: TextStyle(
@@ -501,10 +503,10 @@ class ListProdutsSeller extends StatelessWidget {
                                             width: mediaQueryWidth * 0.28,
                                             height: mediaQueryHeight * 0.05,
                                             decoration: BoxDecoration(
-                                            color: Color(0xFFEE4532),
+                                            color: const Color(0xFFEE4532),
                                               borderRadius: BorderRadius.circular(5)
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text(
                                                 'Edit',
                                                 style: TextStyle(
@@ -526,7 +528,7 @@ class ListProdutsSeller extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     Container(
                       width: mediaQueryWidth,
                       height: mediaQueryHeight * 0.2,
@@ -564,11 +566,11 @@ class ListProdutsSeller extends StatelessWidget {
                                         // color: Colors.green,
                                         child: Center(
                                           child: Container(
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding: const EdgeInsets.only(left: 15),
                                             width: mediaQueryWidth * 0.6,
                                             height: mediaQueryHeight * 0.04,
                                             // color: Colors.red,
-                                            child: Text(
+                                            child: const Text(
                                               'Pubg Mobile',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
@@ -586,11 +588,11 @@ class ListProdutsSeller extends StatelessWidget {
                                         // color: Color.fromARGB(255, 76, 97, 175),
                                         child: Center(
                                           child: Container(
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding: const EdgeInsets.only(left: 15),
                                             width: mediaQueryWidth * 0.6,
                                             height: mediaQueryHeight * 0.04,
                                             // color: Colors.red,
-                                            child: Text(
+                                            child: const Text(
                                               'Rp128.000',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
@@ -621,10 +623,10 @@ class ListProdutsSeller extends StatelessWidget {
                                             width: mediaQueryWidth * 0.28,
                                             height: mediaQueryHeight * 0.05,
                                             decoration: BoxDecoration(
-                                            color: Color(0xFFEE4532),
+                                            color: const Color(0xFFEE4532),
                                               borderRadius: BorderRadius.circular(5)
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text(
                                                 'Hapus',
                                                 style: TextStyle(
@@ -646,10 +648,10 @@ class ListProdutsSeller extends StatelessWidget {
                                             width: mediaQueryWidth * 0.28,
                                             height: mediaQueryHeight * 0.05,
                                             decoration: BoxDecoration(
-                                            color: Color(0xFFEE4532),
+                                            color: const Color(0xFFEE4532),
                                               borderRadius: BorderRadius.circular(5)
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text(
                                                 'Edit',
                                                 style: TextStyle(
@@ -671,7 +673,7 @@ class ListProdutsSeller extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                     Container(
                       width: mediaQueryWidth,
                       height: mediaQueryHeight * 0.2,
@@ -709,11 +711,11 @@ class ListProdutsSeller extends StatelessWidget {
                                         // color: Colors.green,
                                         child: Center(
                                           child: Container(
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding: const EdgeInsets.only(left: 15),
                                             width: mediaQueryWidth * 0.6,
                                             height: mediaQueryHeight * 0.04,
                                             // color: Colors.red,
-                                            child: Text(
+                                            child: const Text(
                                               'Pubg Mobile',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
@@ -731,11 +733,11 @@ class ListProdutsSeller extends StatelessWidget {
                                         // color: Color.fromARGB(255, 76, 97, 175),
                                         child: Center(
                                           child: Container(
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding: const EdgeInsets.only(left: 15),
                                             width: mediaQueryWidth * 0.6,
                                             height: mediaQueryHeight * 0.04,
                                             // color: Colors.red,
-                                            child: Text(
+                                            child: const Text(
                                               'Rp128.000',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
@@ -766,10 +768,10 @@ class ListProdutsSeller extends StatelessWidget {
                                             width: mediaQueryWidth * 0.28,
                                             height: mediaQueryHeight * 0.05,
                                             decoration: BoxDecoration(
-                                            color: Color(0xFFEE4532),
+                                            color: const Color(0xFFEE4532),
                                               borderRadius: BorderRadius.circular(5)
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text(
                                                 'Hapus',
                                                 style: TextStyle(
@@ -791,10 +793,10 @@ class ListProdutsSeller extends StatelessWidget {
                                             width: mediaQueryWidth * 0.28,
                                             height: mediaQueryHeight * 0.05,
                                             decoration: BoxDecoration(
-                                            color: Color(0xFFEE4532),
+                                            color: const Color(0xFFEE4532),
                                               borderRadius: BorderRadius.circular(5)
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text(
                                                 'Edit',
                                                 style: TextStyle(
@@ -823,7 +825,7 @@ class ListProdutsSeller extends StatelessWidget {
               Container(
                 height: mediaQueryHeight,
                 width: mediaQueryWidth,
-                color: Color.fromARGB(255, 223, 223, 223),
+                color: const Color.fromARGB(255, 223, 223, 223),
                 child: ListView(
                   children: [
                     Container(
@@ -863,11 +865,11 @@ class ListProdutsSeller extends StatelessWidget {
                                         // color: Colors.green,
                                         child: Center(
                                           child: Container(
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding: const EdgeInsets.only(left: 15),
                                             width: mediaQueryWidth * 0.6,
                                             height: mediaQueryHeight * 0.04,
                                             // color: Colors.red,
-                                            child: Text(
+                                            child: const Text(
                                               'Pubg Mobile',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
@@ -885,11 +887,11 @@ class ListProdutsSeller extends StatelessWidget {
                                         // color: Color.fromARGB(255, 76, 97, 175),
                                         child: Center(
                                           child: Container(
-                                            padding: EdgeInsets.only(left: 15),
+                                            padding: const EdgeInsets.only(left: 15),
                                             width: mediaQueryWidth * 0.6,
                                             height: mediaQueryHeight * 0.04,
                                             // color: Colors.red,
-                                            child: Text(
+                                            child: const Text(
                                               'Rp128.000',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
@@ -919,10 +921,10 @@ class ListProdutsSeller extends StatelessWidget {
                                             width: mediaQueryWidth * 0.4,
                                             height: mediaQueryHeight * 0.05,
                                             decoration: BoxDecoration(
-                                            color: Color(0xFFEE4532),
+                                            color: const Color(0xFFEE4532),
                                               borderRadius: BorderRadius.circular(5)
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text(
                                                 'Verifikasi Penjualan',
                                                 style: TextStyle(
@@ -943,12 +945,12 @@ class ListProdutsSeller extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    const SizedBox(height: 10,),
                   ],
                 ),
               ),
               //selesai
-              Center(
+              const Center(
                 child: Text('Selesai'),
               ),
             ]

@@ -682,7 +682,7 @@ class HomePage extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return ViewDetailProductApp();
+                                      return ViewDetailProductApp(data: data,);
                                     },
                                   ),
                                 );

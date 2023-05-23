@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../constants.dart';
 
@@ -10,7 +9,7 @@ class LoginScreenTopImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         Text(
           "LOGIN",
@@ -19,12 +18,12 @@ class LoginScreenTopImage extends StatelessWidget {
         SizedBox(height: defaultPadding * 2),
         Row(
           children: [
-            const Spacer(),
+            Spacer(),
             // Expanded(
             //   flex: 8,
             //   child: SvgPicture.asset("assets/icons/login.svg"),
             // ),
-            const Spacer(),
+            Spacer(),
           ],
         ),
         SizedBox(height: defaultPadding * 2),
