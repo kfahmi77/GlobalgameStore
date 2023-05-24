@@ -20,9 +20,7 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   @override
   Widget build(BuildContext context) {
-    final _nameTextController = TextEditingController();
-    final _emailTextController = TextEditingController();
-    final _passwordTextController = TextEditingController();
+
 
     final _focusName = FocusNode();
     final _focusEmail = FocusNode();
@@ -36,7 +34,7 @@ class _SignUpFormState extends State<SignUpForm> {
             keyboardType: TextInputType.text,
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
-            controller: _nameTextController,
+            controller: nameTextController,
             focusNode: _focusName,
             validator: (value) => Validator.validateName(name: value!),
             decoration: const InputDecoration(
@@ -51,7 +49,7 @@ class _SignUpFormState extends State<SignUpForm> {
           TextFormField(
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
-            controller: _emailTextController,
+            controller: emailTextController,
             focusNode: _focusEmail,
             validator: (value) => Validator.validateEmail(
               email: value!,
@@ -71,7 +69,7 @@ class _SignUpFormState extends State<SignUpForm> {
               textInputAction: TextInputAction.done,
               obscureText: true,
               cursorColor: kPrimaryColor,
-              controller: _passwordTextController,
+              controller: passwordTextController,
               focusNode: _focusPassword,
               validator: (value) => Validator.validatePassword(
                 password: value!,
@@ -90,11 +88,11 @@ class _SignUpFormState extends State<SignUpForm> {
             onPressed: () async {
               if (_formKey.currentState!.validate()) {
                 User? user = await FireAuth.registerUsingEmailPassword(
-                  name: _nameTextController.text,
-                  email: _emailTextController.text,
-                  password: _passwordTextController.text,
+                  name: nameTextController.text,
+                  email: emailTextController.text,
+                  password: passwordTextController.text,
                 );
-                await user!.updateDisplayName(_nameTextController.text);
+                await user!.updateDisplayName(nameTextController.text);
                 if (user != null) {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(

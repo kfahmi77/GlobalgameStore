@@ -68,6 +68,7 @@ class _AddProductState extends State<AddProduct> {
         'kategori_produk': selectedValue,
         'kategori_game': selectedValue2,
         'image_url': downloadURL,
+        'seller': _user!.displayName,
         'deskripsi_produk': deskripsiProduct.text,
         'user_id': _user!.uid,
       });

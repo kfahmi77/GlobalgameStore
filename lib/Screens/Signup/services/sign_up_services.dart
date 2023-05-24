@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+final nameTextController = TextEditingController();
+final emailTextController = TextEditingController();
+final passwordTextController = TextEditingController();
 
 class FireAuth {
   static Future<User?> registerUsingEmailPassword({
@@ -9,11 +14,17 @@ class FireAuth {
   }) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
+    final _firestore = FirebaseFirestore.instance;
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+        'name': name,
+        'email': email,
+        'uid': userCredential.user!.uid,
+      });
       user = userCredential.user;
       await user!.updateDisplayName(name);
       await user.reload();

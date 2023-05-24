@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:globalgamestore/Screens/Welcome/welcome_screen.dart';
 import 'package:globalgamestore/home/balance/balance.dart';
 import 'package:globalgamestore/profile/pesanan/pesanan.dart';
+import 'package:globalgamestore/profile/seller/edit_profile.dart';
 import 'package:globalgamestore/profile/seller/store.dart';
 
 class ProfileApp extends StatelessWidget {
@@ -31,14 +32,10 @@ class Profile extends StatelessWidget {
             color: Colors.white, fontSize: 25, fontWeight: FontWeight.w400),
       ),
       backgroundColor: const Color(0xFFEE4532),
-      leading: const CircleAvatar(
-        backgroundColor: Color.fromARGB(255, 230, 230, 230),
-        child: Icon(
-          Icons.person,
-          color: Color(0xFFEE4532),
-          size: 40,
-        ),
-      ),
+      leading: CircleAvatar(
+          backgroundColor: Color.fromARGB(255, 230, 230, 230),
+          backgroundImage:
+              NetworkImage(auth.currentUser?.photoURL.toString() ?? 'Null')),
       actions: [
         SizedBox(
             width: 50,
@@ -440,79 +437,92 @@ class Profile extends StatelessWidget {
                       );
                     },
                   ),
-                  Container(
-                    width: mediaQueryWidth,
-                    height: mediaQueryHeight * 0.07,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: const Color.fromARGB(255, 211, 211, 211))),
-                    // color: Colors.red,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: mediaQueryWidth * 0.15,
-                          height: mediaQueryHeight * 0.07,
-                          // color: Colors.black,
-                          child: const Center(
-                            child: Icon(
-                              Icons.settings,
-                              size: 35,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return EditProfileScreen();
+                          },
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: mediaQueryWidth,
+                      height: mediaQueryHeight * 0.07,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: const Color.fromARGB(255, 211, 211, 211))),
+                      // color: Colors.red,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: mediaQueryWidth * 0.15,
+                            height: mediaQueryHeight * 0.07,
+                            // color: Colors.black,
+                            child: const Center(
+                              child: Icon(
+                                Icons.settings,
+                                size: 35,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: mediaQueryWidth * 0.40,
-                          height: mediaQueryHeight * 0.07,
-                          // color: Color.fromARGB(255, 100, 82, 215),
-                          child: Center(
-                            child: SizedBox(
-                              width: mediaQueryWidth * 0.45,
-                              height: mediaQueryHeight * 0.02,
-                              // color: Colors.red,
-                              child: const Text('Pengaturan'),
+                          SizedBox(
+                            width: mediaQueryWidth * 0.40,
+                            height: mediaQueryHeight * 0.07,
+                            // color: Color.fromARGB(255, 100, 82, 215),
+                            child: Center(
+                              child: SizedBox(
+                                width: mediaQueryWidth * 0.45,
+                                height: mediaQueryHeight * 0.02,
+                                // color: Colors.red,
+                                child: const Text('Pengaturan'),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: mediaQueryWidth * 0.42,
-                          height: mediaQueryHeight * 0.07,
-                          // color: Color.fromARGB(255, 82, 215, 102),
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                  width: mediaQueryWidth * 0.37,
+                          SizedBox(
+                            width: mediaQueryWidth * 0.42,
+                            height: mediaQueryHeight * 0.07,
+                            // color: Color.fromARGB(255, 82, 215, 102),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                    width: mediaQueryWidth * 0.37,
+                                    height: mediaQueryHeight * 0.07,
+                                    // color: Color.fromARGB(255, 82, 160, 215),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: mediaQueryWidth * 0.30,
+                                          height: mediaQueryHeight * 0.02,
+                                          // color: Colors.red,
+                                          // child: Text(
+                                          //   'Gratis',
+                                          // ),
+                                        ),
+                                      ],
+                                    )),
+                                SizedBox(
+                                  width: mediaQueryWidth * 0.05,
                                   height: mediaQueryHeight * 0.07,
-                                  // color: Color.fromARGB(255, 82, 160, 215),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                        width: mediaQueryWidth * 0.30,
-                                        height: mediaQueryHeight * 0.02,
-                                        // color: Colors.red,
-                                        // child: Text(
-                                        //   'Gratis',
-                                        // ),
-                                      ),
-                                    ],
-                                  )),
-                              SizedBox(
-                                width: mediaQueryWidth * 0.05,
-                                height: mediaQueryHeight * 0.07,
-                                // color: Color.fromARGB(255, 215, 148, 82),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 18,
+                                  // color: Color.fromARGB(255, 215, 148, 82),
+                                  child: const Center(
+                                    child: Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 18,
+                                    ),
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
