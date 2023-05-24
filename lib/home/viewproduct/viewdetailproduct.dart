@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:globalgamestore/home/cart/cart.dart';
 import 'package:globalgamestore/home/viewproduct/viewdetailsliderscreen.dart';
 import 'package:globalgamestore/invoice/invoice.dart';
 import 'package:globalgamestore/navigation/navigation.dart';
@@ -24,8 +27,18 @@ class ViewDetailProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQueryHeight = MediaQuery.of(context).size.height;
     final mediaQueryWidth = MediaQuery.of(context).size.width;
-
+    final _firestore = FirebaseFirestore.instance;
+    final User? _user = FirebaseAuth.instance.currentUser;
     final mediaContainerSearchHeight = (mediaQueryHeight * 0.15);
+
+    Future addCart() async {
+      await _firestore.collection('keranjang').add({
+        'nama_produk': data['nama_produk'],
+        'harga_produk': data['harga_produk'],
+        'image_url': data['image_url'],
+        'user_id': _user!.uid,
+      });
+    }
 
     final myAppBar = AppBar(
         title: Container(
@@ -222,15 +235,29 @@ class ViewDetailProduct extends StatelessWidget {
               color: Colors.red,
               child: Row(
                 children: [
-                  Container(
-                    width: mediaQueryWidth * 0.5,
-                    height: mediaQueryHeight * 0.07,
-                    color: Color.fromARGB(255, 12, 150, 56),
-                    child: Center(
+                  InkWell(
+                    onTap: () {
+                      addCart();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return CartApp();
+                          },
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: mediaQueryWidth * 0.5,
+                      height: mediaQueryHeight * 0.07,
+                      color: Color.fromARGB(255, 12, 150, 56),
+                      child: Center(
                         child: Icon(
-                      Icons.add_shopping_cart,
-                      size: 28,
-                    )),
+                          Icons.add_shopping_cart,
+                          size: 28,
+                        ),
+                      ),
+                    ),
                   ),
                   InkWell(
                     child: Container(
