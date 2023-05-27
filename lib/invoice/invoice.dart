@@ -6,7 +6,7 @@ class InvoiceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Invoice();
+    return const Invoice();
   }
 }
 
@@ -20,7 +20,7 @@ class Invoice extends StatelessWidget {
     final mediaQueryWidth = MediaQuery.of(context).size.width;
 
     final myAppBar = AppBar(
-          title: Text(
+          title: const Text(
             'Faktur',
             style: TextStyle(
               color: Colors.black,
@@ -49,7 +49,7 @@ class Invoice extends StatelessWidget {
                 decoration: BoxDecoration(
                 // color: Color.fromARGB(255, 164, 23, 23),
                   border: Border.all(
-                    color: Color.fromARGB(255, 199, 199, 199),
+                    color: const Color.fromARGB(255, 199, 199, 199),
                     // width: 1,
                   )
                 ),
@@ -69,7 +69,7 @@ class Invoice extends StatelessWidget {
                               width: mediaQueryWidth * 0.85,
                               height: mediaQueryHeight * 0.02,
                               color: Colors.white,
-                              child: Text(
+                              child: const Text(
                                 'No. Pesanan: 230408JPUKNBT8',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold
@@ -93,7 +93,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       'Total Pembayaran :',
                                       style: TextStyle(
                                         // fontWeight: FontWeight.bold
@@ -104,7 +104,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       'Waktu Pembayaran :',
                                       style: TextStyle(
                                         // fontWeight: FontWeight.bold
@@ -131,7 +131,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       'Rp214.000',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold
@@ -142,7 +142,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       '08/04/2023',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold
@@ -165,7 +165,7 @@ class Invoice extends StatelessWidget {
                 decoration: BoxDecoration(
                 // color: Color.fromARGB(255, 164, 23, 23),
                   border: Border.all(
-                    color: Color.fromARGB(255, 199, 199, 199),
+                    color: const Color.fromARGB(255, 199, 199, 199),
                     // width: 1,
                   )
                 ),
@@ -185,7 +185,7 @@ class Invoice extends StatelessWidget {
                               width: mediaQueryWidth * 0.85,
                               height: mediaQueryHeight * 0.02,
                               color: Colors.white,
-                              child: Text(
+                              child: const Text(
                                 'Metode Pembayaran : GGPay',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold
@@ -205,7 +205,7 @@ class Invoice extends StatelessWidget {
                 decoration: BoxDecoration(
                 // color: Color.fromARGB(255, 164, 23, 23),
                   border: Border.all(
-                    color: Color.fromARGB(255, 199, 199, 199),
+                    color: const Color.fromARGB(255, 199, 199, 199),
                     // width: 1,
                   )
                 ),
@@ -225,7 +225,7 @@ class Invoice extends StatelessWidget {
                               width: mediaQueryWidth * 0.85,
                               height: mediaQueryHeight * 0.02,
                               color: Colors.white,
-                              child: Text(
+                              child: const Text(
                                 'Rincian Pesanan',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold
@@ -249,7 +249,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       'Nama Produk :',
                                       style: TextStyle(
                                         // fontWeight: FontWeight.bold
@@ -260,7 +260,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       'Pubg Mobile',
                                       style: TextStyle(
                                         // fontWeight: FontWeight.bold
@@ -287,7 +287,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       'Categori :',
                                       style: TextStyle(
                                         // fontWeight: FontWeight.bold
@@ -298,7 +298,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       'Mobile',
                                       style: TextStyle(
                                         // fontWeight: FontWeight.bold
@@ -321,7 +321,7 @@ class Invoice extends StatelessWidget {
                 decoration: BoxDecoration(
                 // color: Color.fromARGB(255, 164, 23, 23),
                   border: Border.all(
-                    color: Color.fromARGB(255, 199, 199, 199),
+                    color: const Color.fromARGB(255, 199, 199, 199),
                     // width: 1,
                   )
                 ),
@@ -341,7 +341,7 @@ class Invoice extends StatelessWidget {
                               width: mediaQueryWidth * 0.85,
                               height: mediaQueryHeight * 0.02,
                               color: Colors.white,
-                              child: Text(
+                              child: const Text(
                                 'Subtotal untuk Produk',
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold
@@ -365,7 +365,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       'Harga :',
                                       style: TextStyle(
                                         // fontWeight: FontWeight.bold
@@ -376,7 +376,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       '214.000',
                                       style: TextStyle(
                                         // fontWeight: FontWeight.bold
@@ -403,7 +403,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       'Total Pembayaran :',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold
@@ -414,7 +414,7 @@ class Invoice extends StatelessWidget {
                                     width: mediaQueryWidth * 0.42,
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
-                                    child: Text(
+                                    child: const Text(
                                       'Rp214.000',
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold
@@ -444,7 +444,7 @@ class Invoice extends StatelessWidget {
                       color: Colors.red,
                         borderRadius: BorderRadius.circular(10)
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Selesai',
                           style: TextStyle(

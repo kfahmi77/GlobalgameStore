@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:globalgamestore/home/balance/balance.dart';
 import 'package:globalgamestore/home/cart/cart.dart';
@@ -157,36 +159,66 @@ class HomePage extends StatelessWidget {
                               width: 1,
                             ),
                           ),
-                          child: Center(
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: mediaQueryWidth * 0.13,
-                                  height: 50,
-                                  // color: Colors.red,
-                                  child: Center(
-                                    child: Icon(
-                                      Icons.account_balance_wallet_outlined,
-                                      size: 30,
-                                      color: Colors.red,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: mediaQueryWidth * 0.25,
-                                  height: 50,
-                                  // color: Colors.red,
-                                  child: Center(
-                                    child: FittedBox(
-                                      child: Text(
-                                        'Rp1.000.000',
-                                        style: TextStyle(fontSize: 20),
+                          child: StreamBuilder(
+                            stream: FirebaseFirestore.instance
+                                .collection('topup')
+                                .where('uid',
+                                    isEqualTo:
+                                        FirebaseAuth.instance.currentUser!.uid)
+                                .snapshots(),
+                            builder:
+                                (BuildContext context, AsyncSnapshot snapshot) {
+                              if (snapshot.hasError) {
+                                return Text('Error: ${snapshot.error}');
+                              }
+
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              }
+
+                              List<DocumentSnapshot> documents =
+                                  snapshot.data!.docs;
+                              int totalAmount = 0;
+                              for (DocumentSnapshot doc in documents) {
+                                Map<String, dynamic> data =
+                                    doc.data() as Map<String, dynamic>;
+                                if (data.containsKey('amount')) {
+                                  totalAmount += data['amount'] as int;
+                                }
+                              }
+                              return Center(
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: mediaQueryWidth * 0.13,
+                                      height: 50,
+                                      // color: Colors.red,
+                                      child: Center(
+                                        child: Icon(
+                                          Icons.account_balance_wallet_outlined,
+                                          size: 30,
+                                          color: Colors.red,
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    Container(
+                                      width: mediaQueryWidth * 0.25,
+                                      height: 50,
+                                      // color: Colors.red,
+                                      child: Center(
+                                        child: FittedBox(
+                                          child: Text(
+                                            'Rp $totalAmount',
+                                            style: TextStyle(fontSize: 20),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              );
+                            },
                           ),
                         ),
                         Container(
@@ -219,7 +251,7 @@ class HomePage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: mediaQueryWidth * 0.25,
                                       height: 50,
                                       // color: Colors.red,

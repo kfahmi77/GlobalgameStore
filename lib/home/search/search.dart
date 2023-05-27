@@ -7,7 +7,7 @@ class SearchApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SearchMenu(),
     );
@@ -36,7 +36,7 @@ class SearchMenu extends StatelessWidget {
               decoration: BoxDecoration(
               color: Colors.white,
                 border: Border.all(
-                  color: Color.fromARGB(255, 201, 201, 201),
+                  color: const Color.fromARGB(255, 201, 201, 201),
                 )
               ),
               child: Column(
@@ -58,7 +58,7 @@ class SearchMenu extends StatelessWidget {
                           width: mediaQueryWidth * 0.15,
                           height: mediaContainerSearchHeight * 0.50,
                           // color: Color.fromARGB(255, 73, 54, 244),
-                          child: Icon(
+                          child: const Icon(
                             Icons.arrow_back_outlined,
                             size: 35,
                             color: Color(0xFFEE4532),
@@ -84,7 +84,7 @@ class SearchMenu extends StatelessWidget {
                               width: mediaQueryWidth * 0.68,
                               height: mediaContainerSearchHeight * 0.35,
                               // color: Colors.red,
-                              child: TextField(
+                              child: const TextField(
                                 showCursor: true,
                                 cursorHeight: 20,
                                 textAlignVertical: TextAlignVertical.bottom,
@@ -123,14 +123,14 @@ class SearchMenu extends StatelessWidget {
                             child: Container(
                               width: mediaQueryWidth * 0.15,
                               height: mediaContainerSearchHeight * 0.35,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0xFFEE4532),
                                 borderRadius: BorderRadius.only(
                                     topRight: Radius.circular(5),
                                     bottomRight: Radius.circular(5)
                                   ),
                               ),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.search,
                                 color: Colors.white,
                                 size: 30,

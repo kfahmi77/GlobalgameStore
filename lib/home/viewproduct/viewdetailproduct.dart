@@ -41,14 +41,14 @@ class ViewDetailProduct extends StatelessWidget {
     }
 
     final myAppBar = AppBar(
-        title: Container(
+        title: SizedBox(
             width: mediaQueryWidth * 0.68,
             height: mediaContainerSearchHeight * 0.50,
             child: Center(
-              child: Container(
+              child: SizedBox(
                 width: mediaQueryWidth * 0.68,
                 height: mediaContainerSearchHeight * 0.35,
-                child: TextField(
+                child: const TextField(
                   showCursor: true,
                   cursorHeight: 20,
                   textAlignVertical: TextAlignVertical.bottom,
@@ -82,7 +82,7 @@ class ViewDetailProduct extends StatelessWidget {
         backgroundColor: Colors.white,
         leading: Container(
           child: InkWell(
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_outlined,
               size: 35,
               color: Color(0xFFEE4532),
@@ -121,26 +121,26 @@ class ViewDetailProduct extends StatelessWidget {
             Container(
               width: mediaQueryWidth,
               height: mediaQueryHeight * 0.2,
-              color: Color.fromARGB(255, 214, 214, 214),
+              color: const Color.fromARGB(255, 214, 214, 214),
               child: Column(
                 children: [
                   Container(
                     width: mediaQueryWidth,
                     height: mediaQueryHeight * 0.01,
-                    color: Color.fromARGB(255, 214, 214, 214),
+                    color: const Color.fromARGB(255, 214, 214, 214),
                   ),
                   Container(
                     width: mediaQueryWidth,
                     height: mediaQueryHeight * 0.11,
                     color: Colors.white,
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
                         width: mediaQueryWidth * 0.9,
                         height: mediaQueryHeight * 0.08,
                         // color: Color.fromARGB(255, 214, 22, 22),
                         child: Text(
                           data['nama_produk'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
@@ -152,13 +152,13 @@ class ViewDetailProduct extends StatelessWidget {
                     height: mediaQueryHeight * 0.07,
                     color: Colors.white,
                     child: Center(
-                      child: Container(
+                      child: SizedBox(
                         width: mediaQueryWidth * 0.9,
                         height: mediaQueryHeight * 0.08,
                         // color: Color.fromARGB(255, 214, 22, 22),
                         child: Text(
                           data['harga_produk'].toString(),
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             color: Color(0xFFEE4532),
                           ),
@@ -169,11 +169,11 @@ class ViewDetailProduct extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
+            SizedBox(
               width: mediaQueryWidth,
               height: mediaQueryHeight * 0.1,
               // color: Colors.amber,
-              child: ListTile(
+              child: const ListTile(
                 leading: CircleAvatar(
                   backgroundColor: Color(0xFFEE4532),
                   radius: 40,
@@ -191,7 +191,7 @@ class ViewDetailProduct extends StatelessWidget {
             Container(
               width: mediaQueryWidth,
               height: mediaQueryHeight * 0.01,
-              color: Color.fromARGB(255, 214, 214, 214),
+              color: const Color.fromARGB(255, 214, 214, 214),
             ),
             Container(
                 width: mediaQueryWidth,
@@ -199,11 +199,11 @@ class ViewDetailProduct extends StatelessWidget {
                 color: Colors.white,
                 child: Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: mediaQueryWidth * 0.4,
                       height: 50,
                       // color: Colors.red,
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Deskripsi',
                           style: TextStyle(
@@ -215,7 +215,7 @@ class ViewDetailProduct extends StatelessWidget {
                     ),
                   ],
                 )),
-            Container(
+            SizedBox(
               width: mediaQueryWidth,
               height: mediaQueryHeight * 0.2,
               // color: Color.fromARGB(255, 232, 42, 42),
@@ -242,7 +242,7 @@ class ViewDetailProduct extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return CartApp();
+                            return const CartApp();
                           },
                         ),
                       );
@@ -250,8 +250,8 @@ class ViewDetailProduct extends StatelessWidget {
                     child: Container(
                       width: mediaQueryWidth * 0.5,
                       height: mediaQueryHeight * 0.07,
-                      color: Color.fromARGB(255, 12, 150, 56),
-                      child: Center(
+                      color: const Color.fromARGB(255, 12, 150, 56),
+                      child: const Center(
                         child: Icon(
                           Icons.add_shopping_cart,
                           size: 28,
@@ -263,8 +263,8 @@ class ViewDetailProduct extends StatelessWidget {
                     child: Container(
                       width: mediaQueryWidth * 0.5,
                       height: mediaQueryHeight * 0.07,
-                      color: Color(0xFFEE4532),
-                      child: Center(
+                      color: const Color(0xFFEE4532),
+                      child: const Center(
                         child: Text(
                           'Beli',
                           style: TextStyle(fontSize: 18, color: Colors.white),
@@ -276,7 +276,7 @@ class ViewDetailProduct extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return InvoiceApp();
+                            return const InvoiceApp();
                           },
                         ),
                       );
