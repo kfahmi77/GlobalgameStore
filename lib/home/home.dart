@@ -669,7 +669,7 @@ class HomePage extends StatelessWidget {
                                       // color: Colors.red,
                                       padding: EdgeInsets.only(left: 12),
                                       child: Text(
-                                        data['harga_produk'],
+                                        data['harga_produk'].toString(),
                                         style: TextStyle(
                                             fontSize: 20, color: Colors.red),
                                       ),
@@ -682,7 +682,9 @@ class HomePage extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return ViewDetailProductApp(data: data,);
+                                      return ViewDetailProductApp(
+                                        data: data,
+                                      );
                                     },
                                   ),
                                 );

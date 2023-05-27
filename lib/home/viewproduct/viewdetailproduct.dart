@@ -157,7 +157,7 @@ class ViewDetailProduct extends StatelessWidget {
                         height: mediaQueryHeight * 0.08,
                         // color: Color.fromARGB(255, 214, 22, 22),
                         child: Text(
-                          data['harga_produk'],
+                          data['harga_produk'].toString(),
                           style: TextStyle(
                             fontSize: 20,
                             color: Color(0xFFEE4532),
