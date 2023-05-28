@@ -179,12 +179,12 @@ class HomePage extends StatelessWidget {
 
                               List<DocumentSnapshot> documents =
                                   snapshot.data!.docs;
-                              int totalAmount = 0;
+                              num totalAmount = 0;
                               for (DocumentSnapshot doc in documents) {
                                 Map<String, dynamic> data =
                                     doc.data() as Map<String, dynamic>;
                                 if (data.containsKey('amount')) {
-                                  totalAmount += data['amount'] as int;
+                                  totalAmount += data['amount'] as num;
                                 }
                               }
                               return Center(

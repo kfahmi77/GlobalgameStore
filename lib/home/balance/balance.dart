@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:globalgamestore/home/balance/top_up_balance.dart';
 import 'package:globalgamestore/navigation/navigation.dart';
@@ -72,24 +74,52 @@ class HomeBalance extends StatelessWidget {
                           width: mediaQueryWidth,
                           height: mediaQueryHeight * 0.05,
                           // color: Colors.white,
-                          child: Center(
-                            child: Container(
-                              width: mediaQueryWidth * 0.5,
-                              height: mediaQueryHeight * 0.05,
-                              // color: Colors.white,
-                              child: Center(
-                                child: FittedBox(
-                                  child: Text(
-                                    'Rp1.000.000',
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400),
+                          child: StreamBuilder(
+                              stream: FirebaseFirestore.instance
+                                  .collection('topup')
+                                  .where('uid',
+                                      isEqualTo: FirebaseAuth
+                                          .instance.currentUser!.uid)
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (snapshot.hasError) {
+                                  return Text('Error: ${snapshot.error}');
+                                }
+
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return CircularProgressIndicator();
+                                }
+
+                                List<DocumentSnapshot> documents =
+                                    snapshot.data!.docs;
+                                int totalAmount = 0;
+                                for (DocumentSnapshot doc in documents) {
+                                  Map<String, dynamic> data =
+                                      doc.data() as Map<String, dynamic>;
+                                  if (data.containsKey('amount')) {
+                                    totalAmount += data['amount'] as int;
+                                  }
+                                }
+                                return Center(
+                                  child: Container(
+                                    width: mediaQueryWidth * 0.5,
+                                    height: mediaQueryHeight * 0.05,
+                                    // color: Colors.white,
+                                    child: Center(
+                                      child: FittedBox(
+                                        child: Text(
+                                          'Rp $totalAmount',
+                                          style: TextStyle(
+                                              fontSize: 25,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                          ),
+                                );
+                              }),
                         ),
                       ),
                     ),

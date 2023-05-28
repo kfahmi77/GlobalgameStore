@@ -34,7 +34,6 @@ class AddProduct extends StatefulWidget {
 }
 
 class _AddProductState extends State<AddProduct> {
-  final _firestore = FirebaseFirestore.instance;
   final User? _user = FirebaseAuth.instance.currentUser;
   TextEditingController namaProduct = TextEditingController();
   TextEditingController hargaProduct = TextEditingController();
@@ -62,9 +61,12 @@ class _AddProductState extends State<AddProduct> {
       String downloadURL = await storageReference.getDownloadURL();
 
       // Save the download URL to Firestore
-      await _firestore.collection('product').add({
+      CollectionReference produkRef =
+          FirebaseFirestore.instance.collection('product');
+
+      DocumentReference docRef = await produkRef.add({
         'nama_produk': namaProduct.text,
-        'harga_produk': hargaProduct.text,
+        'harga_produk': double.parse(hargaProduct.text),
         'kategori_produk': selectedValue,
         'kategori_game': selectedValue2,
         'image_url': downloadURL,
@@ -72,6 +74,12 @@ class _AddProductState extends State<AddProduct> {
         'deskripsi_produk': deskripsiProduct.text,
         'user_id': _user!.uid,
       });
+
+      // Mendapatkan ID dokumen yang baru ditambahkan
+      String docId = docRef.id;
+
+      // Memperbarui data produk dengan field 'doc_id'
+      await docRef.update({'doc_id': docId});
       // ignore: use_build_context_synchronously
       showSuccessDialog(context);
 
@@ -244,6 +252,7 @@ class _AddProductState extends State<AddProduct> {
                         child: TextField(
                           textAlignVertical: TextAlignVertical.bottom,
                           controller: hargaProduct,
+                          keyboardType: TextInputType.number,
                           decoration: const InputDecoration(
                             hintText: 'Harga Produk',
                             enabledBorder: OutlineInputBorder(

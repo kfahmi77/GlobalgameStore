@@ -6,6 +6,7 @@ import 'package:globalgamestore/home/cart/cart.dart';
 import 'package:globalgamestore/home/viewproduct/viewdetailsliderscreen.dart';
 import 'package:globalgamestore/invoice/invoice.dart';
 import 'package:globalgamestore/navigation/navigation.dart';
+import 'package:path/path.dart';
 
 class ViewDetailProductApp extends StatelessWidget {
   final Map<String, dynamic> data;
@@ -38,6 +39,74 @@ class ViewDetailProduct extends StatelessWidget {
         'image_url': data['image_url'],
         'user_id': _user!.uid,
       });
+    }
+
+    void showInsufficientBalanceDialog(BuildContext context) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Saldo Tidak Cukup'),
+            content: Text(
+                'Maaf, saldo Anda tidak mencukupi untuk melakukan pembelian.'),
+            actions: [
+              TextButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.pop(context); // Menutup dialog
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
+    Future<void> beliProduk(
+        String userId, String productId, num hargaProduk) async {
+      // Mendapatkan referensi koleksi topup
+      CollectionReference topupRef =
+          FirebaseFirestore.instance.collection('topup');
+
+      try {
+        // Memulai transaksi batch
+        WriteBatch batch = FirebaseFirestore.instance.batch();
+
+        // Mengambil data topup saat ini berdasarkan ID pengguna
+        QuerySnapshot topupQuerySnapshot =
+            await topupRef.where('uid', isEqualTo: userId).get();
+        if (topupQuerySnapshot.size == 1) {
+          DocumentSnapshot topupSnapshot = topupQuerySnapshot.docs[0];
+          Map<String, dynamic>? topupData =
+              topupSnapshot.data() as Map<String, dynamic>?;
+          if (topupData != null) {
+            num saldo = topupData['amount'] ?? 0.0;
+
+            // Memeriksa apakah saldo cukup untuk membeli produk
+            if (saldo >= hargaProduk) {
+              // Mengurangi saldo dengan harga produk
+              num saldoBaru = saldo - hargaProduk;
+
+              // Memperbarui saldo di koleksi topup
+              batch.update(topupSnapshot.reference, {'amount': saldoBaru});
+
+              // Menandai produk sebagai sudah dibeli di koleksi produk
+
+              // Menyimpan perubahan menggunakan transaksi batch
+              await batch.commit();
+
+              print('Pembelian produk berhasil');
+            } else {
+              showInsufficientBalanceDialog(context);
+              print('Saldo tidak cukup');
+            }
+          }
+        } else {
+          print('Data topup tidak ditemukan');
+        }
+      } catch (e) {
+        print('Terjadi kesalahan: $e');
+      }
     }
 
     final myAppBar = AppBar(
@@ -272,14 +341,16 @@ class ViewDetailProduct extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return const InvoiceApp();
-                          },
-                        ),
-                      );
+                      beliProduk(data['user_id'], data['deskripsi_produk'],
+                          data['harga_produk']);
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) {
+                      //       return const InvoiceApp();
+                      //     },
+                      //   ),
+                      // );
                     },
                   )
                 ],
