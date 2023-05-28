@@ -101,7 +101,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ? CircleAvatar(
                         radius: 50,
                         backgroundImage: NetworkImage(
-                          _firebaseAuth.currentUser!.photoURL!,
+                          _firebaseAuth.currentUser?.photoURL ??
+                              'https://www.nicepng.com/maxp/u2y3a9e6t4o0a9w7/',
                         ),
                       )
                     : null,

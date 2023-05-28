@@ -405,7 +405,8 @@ class _AddProductState extends State<AddProduct> {
                         width: mediaQueryWidth * 0.8,
                         height: mediaQueryHeight * 0.035,
                         // color: Colors.amber,
-                        child: const TextField(
+                        child: TextField(
+                          controller: deskripsiProduct,
                           textAlignVertical: TextAlignVertical.bottom,
                           decoration: InputDecoration(
                             hintText: '....',
