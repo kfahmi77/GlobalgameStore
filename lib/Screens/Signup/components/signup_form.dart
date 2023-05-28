@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:globalgamestore/Screens/Signup/components/validator.dart';
+import 'package:globalgamestore/navigation/navigation.dart';
 import 'package:globalgamestore/profile/profile.dart';
 
 import '../../../components/already_have_an_account_acheck.dart';
@@ -96,7 +97,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 if (user != null) {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
-                      builder: (context) => ProfileApp(),
+                      builder: (context) => NavAppBar(),
                     ),
                     ModalRoute.withName('/'),
                   );
