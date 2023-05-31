@@ -8,7 +8,7 @@ class StoreApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Store();
+    return const Store();
   }
 }
 
@@ -25,7 +25,7 @@ class Store extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Toko Saya',
             style: TextStyle(
               color: Colors.white,
@@ -34,10 +34,10 @@ class Store extends StatelessWidget {
             ),
           ),
           // backgroundColor: Colors.white,
-          backgroundColor: Color(0xFFEE4532),
+          backgroundColor: const Color(0xFFEE4532),
           leading: Container(
             child: InkWell(
-              child: Icon(
+              child: const Icon(
                 Icons.arrow_back_outlined,
                 size: 28,
                 color: Colors.white,
@@ -47,7 +47,7 @@ class Store extends StatelessWidget {
                   context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return ProfileApp();
+                        return const ProfileApp();
                       },
                     ),
                 );
@@ -64,35 +64,35 @@ class Store extends StatelessWidget {
                 decoration: BoxDecoration(
                 color: Colors.white,
                   border: Border.all(
-                    color: Color.fromARGB(255, 211, 211, 211)
+                    color: const Color.fromARGB(255, 211, 211, 211)
                   )
                 ),
                 child: Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: mediaQueryWidth * 0.12,
                       height: mediaQueryHeight * 0.07,
                       // color: Colors.red,
-                      child: Center(
+                      child: const Center(
                         child: Icon(Icons.add_business_outlined),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: mediaQueryWidth * 0.79,
                       height: mediaQueryHeight * 0.07,
                       // color: Colors.green,
                       child: Center(
-                        child: Container(
+                        child: SizedBox(
                           width: mediaQueryWidth * 0.79,
                           height: mediaQueryHeight * 0.02,
                           // color: Color.fromARGB(255, 76, 76, 175),
                           child: Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: mediaQueryWidth * 0.3,
                                 height: mediaQueryHeight * 0.02,
                                 // color: Colors.amber,
-                                child: Text(
+                                child: const Text(
                                   'Tambah Produk'
                                 ),
                               )
@@ -101,11 +101,11 @@ class Store extends StatelessWidget {
                         )
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: mediaQueryWidth * 0.08,
                       height: mediaQueryHeight * 0.07,
                       // color: Colors.amber,
-                      child: Center(
+                      child: const Center(
                         child: Icon(
                           Icons.arrow_forward_ios,
                           size: 16,
@@ -120,7 +120,7 @@ class Store extends StatelessWidget {
                   context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return AddProductApp();
+                        return const AddProductApp();
                       },
                     ),
                 );
@@ -133,35 +133,35 @@ class Store extends StatelessWidget {
                 decoration: BoxDecoration(
                 color: Colors.white,
                   border: Border.all(
-                    color: Color.fromARGB(255, 211, 211, 211)
+                    color: const Color.fromARGB(255, 211, 211, 211)
                   )
                 ),
                 child: Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: mediaQueryWidth * 0.12,
                       height: mediaQueryHeight * 0.07,
                       // color: Colors.red,
-                      child: Center(
+                      child: const Center(
                         child: Icon(Icons.folder_copy_outlined),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: mediaQueryWidth * 0.79,
                       height: mediaQueryHeight * 0.07,
                       // color: Colors.green,
                       child: Center(
-                        child: Container(
+                        child: SizedBox(
                           width: mediaQueryWidth * 0.79,
                           height: mediaQueryHeight * 0.02,
                           // color: Color.fromARGB(255, 76, 76, 175),
                           child: Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: mediaQueryWidth * 0.4,
                                 height: mediaQueryHeight * 0.02,
                                 // color: Colors.amber,
-                                child: Text(
+                                child: const Text(
                                   'Daftar Produk Penjualan'
                                 ),
                               )
@@ -170,11 +170,11 @@ class Store extends StatelessWidget {
                         )
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: mediaQueryWidth * 0.08,
                       height: mediaQueryHeight * 0.07,
                       // color: Colors.amber,
-                      child: Center(
+                      child: const Center(
                         child: Icon(
                           Icons.arrow_forward_ios,
                           size: 16,
@@ -189,7 +189,7 @@ class Store extends StatelessWidget {
                   context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return ListProductsSellerApp();
+                        return const ListProductsSellerApp();
                       },
                     ),
                 );

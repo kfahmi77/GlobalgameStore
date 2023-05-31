@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:globalgamestore/profile/profile.dart';
 import 'package:globalgamestore/profile/seller/edit_product_seller.dart';
-import 'package:globalgamestore/profile/seller/viewdetailproductseller.dart';
 
 class ListProductsSellerApp extends StatelessWidget {
   const ListProductsSellerApp({super.key});
@@ -98,7 +97,7 @@ class ListProdutsSeller extends StatelessWidget {
                   stream: getData(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
-                      return Center(child: const Text('tidak ada data'));
+                      return const Center(child: Text('tidak ada data'));
                     }
 
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -106,7 +105,7 @@ class ListProdutsSeller extends StatelessWidget {
                     }
                     return ListView(
                         children: snapshot.data!.docs.map((data) {
-                      return Container(
+                      return SizedBox(
                         width: mediaQueryWidth,
                         height: mediaQueryHeight * 0.2,
                         // color: Colors.red,
@@ -128,13 +127,13 @@ class ListProdutsSeller extends StatelessWidget {
                               color: Colors.white,
                               child: Column(
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width: mediaQueryWidth * 0.6,
                                     height: mediaQueryHeight * 0.14,
                                     // color: Colors.red,
                                     child: Column(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: mediaQueryWidth * 0.6,
                                           height: mediaQueryHeight * 0.07,
                                           // color: Colors.green,
@@ -149,7 +148,7 @@ class ListProdutsSeller extends StatelessWidget {
                                                 data['nama_produk'],
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontSize: 18,
                                                     fontWeight:
                                                         FontWeight.w300),
@@ -157,7 +156,7 @@ class ListProdutsSeller extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: mediaQueryWidth * 0.6,
                                           height: mediaQueryHeight * 0.07,
                                           // color: Color.fromARGB(255, 76, 97, 175),
@@ -172,7 +171,7 @@ class ListProdutsSeller extends StatelessWidget {
                                                 data['harga_produk'].toString(),
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w400,
                                                   color: Color(0xFFEE4532),
@@ -184,13 +183,13 @@ class ListProdutsSeller extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  Container(
+                                  SizedBox(
                                     width: mediaQueryWidth * 0.6,
                                     height: mediaQueryHeight * 0.06,
                                     // color: Color.fromARGB(255, 76, 97, 175),
                                     child: Row(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: mediaQueryWidth * 0.3,
                                           height: mediaQueryHeight * 0.06,
                                           // color: Color.fromARGB(255, 20, 170, 43),
@@ -209,7 +208,7 @@ class ListProdutsSeller extends StatelessWidget {
                                                     context: context,
                                                     builder:
                                                         (BuildContext context) {
-                                                      return ConfirmationDialogWidget();
+                                                      return const ConfirmationDialogWidget();
                                                     },
                                                   ).then((value) {
                                                     if (value != null &&
@@ -243,7 +242,7 @@ class ListProdutsSeller extends StatelessWidget {
                                           width: mediaQueryWidth * 0.3,
                                           height: mediaQueryHeight * 0.06,
                                           // color: Color.fromARGB(255, 170, 123, 20),
-                                          child: Container(
+                                          child: SizedBox(
                                             width: mediaQueryWidth * 0.3,
                                             height: mediaQueryHeight * 0.06,
                                             // color: Color.fromARGB(255, 20, 170, 43),
@@ -308,14 +307,16 @@ class ListProdutsSeller extends StatelessWidget {
 }
 
 class ConfirmationDialogWidget extends StatelessWidget {
+  const ConfirmationDialogWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Konfirmasi'),
-      content: Text('Apakah Anda yakin ingin menghapus data?'),
+      title: const Text('Konfirmasi'),
+      content: const Text('Apakah Anda yakin ingin menghapus data?'),
       actions: <Widget>[
         ElevatedButton(
-          child: Text('Batal'),
+          child: const Text('Batal'),
           onPressed: () {
             Navigator.of(context)
                 .pop(false); // Kembali ke halaman sebelumnya dengan nilai false
@@ -325,7 +326,7 @@ class ConfirmationDialogWidget extends StatelessWidget {
           style: ButtonStyle(
             backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
           ),
-          child: Text('Hapus'),
+          child: const Text('Hapus'),
           onPressed: () {
             Navigator.of(context)
                 .pop(true); // Kembali ke halaman sebelumnya dengan nilai true

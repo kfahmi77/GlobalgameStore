@@ -96,15 +96,15 @@ class _AddProductState extends State<AddProduct> {
       context: context,
       builder: (BuildContext dialogContext) {
         return AlertDialog(
-          title: Text('Sukses'),
-          content: Text('Data berhasil ditambahkan.'),
+          title: const Text('Sukses'),
+          content: const Text('Data berhasil ditambahkan.'),
           actions: [
             TextButton(
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.pushReplacement(
                   dialogContext,
-                  MaterialPageRoute(builder: (context) => NavAppBar()),
+                  MaterialPageRoute(builder: (context) => const NavAppBar()),
                 );
               },
             ),
@@ -317,9 +317,9 @@ class _AddProductState extends State<AddProduct> {
                               // color: Colors.red,
                               padding: const EdgeInsets.only(left: 10),
                               child: TypePrducts(
-                                onSelectValue: (String _selectedValue) {
+                                onSelectValue: (String selectedValue) {
                                   setState(() {
-                                    selectedValue = _selectedValue;
+                                    selectedValue = selectedValue;
                                   });
                                 },
                               ),
@@ -372,9 +372,9 @@ class _AddProductState extends State<AddProduct> {
                               // color: Colors.red,
                               padding: const EdgeInsets.only(left: 10),
                               child: CategoryGames(
-                                onSelectValue2: (String _selectedValue) {
+                                onSelectValue2: (String selectedValue) {
                                   setState(() {
-                                    selectedValue2 = _selectedValue;
+                                    selectedValue2 = selectedValue;
                                   });
                                 },
                               ),
@@ -417,7 +417,7 @@ class _AddProductState extends State<AddProduct> {
                         child: TextField(
                           controller: deskripsiProduct,
                           textAlignVertical: TextAlignVertical.bottom,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: '....',
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.only(

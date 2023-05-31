@@ -16,19 +16,22 @@ class PesananApp extends StatelessWidget {
 class Pesanan extends StatelessWidget {
   // const Pesanan({super.key});
   // DefaultTabController myController = DefaultTabController(length: 2, child: null);
-  List<Tab> myTab = [
-    Tab(text: 'Menunggu Verifikasi',),
-    Tab(text: 'Selesai',),
-  ];
+
+
+  Pesanan({super.key});
   @override
   Widget build(BuildContext context) {
+      List<Tab> myTab = [
+    const Tab(text: 'Menunggu Verifikasi',),
+    const Tab(text: 'Selesai',),
+  ];
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
         length: myTab.length,
         child: Scaffold(
           appBar: AppBar(
-            title: Text(
+            title: const Text(
               'Pesanan Saya',
               style: TextStyle(
                 color: Colors.black,
@@ -38,14 +41,14 @@ class Pesanan extends StatelessWidget {
             ),
             bottom: TabBar(
               tabs: myTab,
-              indicatorColor: Color(0xFFEE4532),
+              indicatorColor: const Color(0xFFEE4532),
               unselectedLabelColor: Colors.black,
-              labelColor: Color(0xFFEE4532),
+              labelColor: const Color(0xFFEE4532),
             ),
             backgroundColor: Colors.white,
             leading: Container(
               child: InkWell(
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_outlined,
                   size: 32,
                   color: Color(0xFFEE4532),
@@ -55,7 +58,7 @@ class Pesanan extends StatelessWidget {
                     context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return ProfileApp();
+                          return const ProfileApp();
                         },
                       ),
                   );
@@ -63,7 +66,7 @@ class Pesanan extends StatelessWidget {
               ),
             )
           ),
-          body: TabBarView(
+          body: const TabBarView(
             children: [
               Center(
                 child: Text('Tidak Ada'),

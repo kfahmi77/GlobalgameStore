@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:globalgamestore/Screens/Signup/components/validator.dart';
 import 'package:globalgamestore/navigation/navigation.dart';
-import 'package:globalgamestore/profile/profile.dart';
 
 import '../../../components/already_have_an_account_acheck.dart';
 import '../../../constants.dart';
@@ -23,12 +22,12 @@ class _SignUpFormState extends State<SignUpForm> {
   Widget build(BuildContext context) {
 
 
-    final _focusName = FocusNode();
-    final _focusEmail = FocusNode();
-    final _focusPassword = FocusNode();
-    final _formKey = GlobalKey<FormState>();
+    final focusName = FocusNode();
+    final focusEmail = FocusNode();
+    final focusPassword = FocusNode();
+    final formKey = GlobalKey<FormState>();
     return Form(
-      key: _formKey,
+      key: formKey,
       child: Column(
         children: [
           TextFormField(
@@ -36,7 +35,7 @@ class _SignUpFormState extends State<SignUpForm> {
             textInputAction: TextInputAction.next,
             cursorColor: kPrimaryColor,
             controller: nameTextController,
-            focusNode: _focusName,
+            focusNode: focusName,
             validator: (value) => Validator.validateName(name: value!),
             decoration: const InputDecoration(
               hintText: "Username",
@@ -51,7 +50,7 @@ class _SignUpFormState extends State<SignUpForm> {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             controller: emailTextController,
-            focusNode: _focusEmail,
+            focusNode: focusEmail,
             validator: (value) => Validator.validateEmail(
               email: value!,
             ),
@@ -71,7 +70,7 @@ class _SignUpFormState extends State<SignUpForm> {
               obscureText: true,
               cursorColor: kPrimaryColor,
               controller: passwordTextController,
-              focusNode: _focusPassword,
+              focusNode: focusPassword,
               validator: (value) => Validator.validatePassword(
                 password: value!,
               ),
@@ -87,21 +86,19 @@ class _SignUpFormState extends State<SignUpForm> {
           const SizedBox(height: defaultPadding / 2),
           ElevatedButton(
             onPressed: () async {
-              if (_formKey.currentState!.validate()) {
+              if (formKey.currentState!.validate()) {
                 User? user = await FireAuth.registerUsingEmailPassword(
                   name: nameTextController.text,
                   email: emailTextController.text,
                   password: passwordTextController.text,
                 );
                 await user!.updateDisplayName(nameTextController.text);
-                if (user != null) {
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                      builder: (context) => NavAppBar(),
-                    ),
-                    ModalRoute.withName('/'),
-                  );
-                }
+                Navigator.of(context).pushAndRemoveUntil(
+                  MaterialPageRoute(
+                    builder: (context) => const NavAppBar(),
+                  ),
+                  ModalRoute.withName('/'),
+                );
               }
             },
             child: Text("Sign Up".toUpperCase()),

@@ -49,10 +49,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                ProfileApp()), // Ganti dengan halaman profil yang baru
+                const ProfileApp()), // Ganti dengan halaman profil yang baru
       );
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Profile updated successfully')),
+        const SnackBar(content: Text('Profile updated successfully')),
       );
     }
   }
@@ -63,7 +63,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           .FirebaseStorage.instance
           .ref()
           .child('profile_images')
-          .child(user!.uid + '.jpg');
+          .child('${user!.uid}.jpg');
 
       firebase_storage.UploadTask uploadTask =
           storageReference.putFile(imageFile);
@@ -85,7 +85,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: const Text('Edit Profile'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -107,15 +107,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       )
                     : null,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: _selectImage,
-                child: Text('Choose Image'),
+                child: const Text('Choose Image'),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextField(
                 controller: _displayNameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Display Name',
                 ),
                 onChanged: (value) {
@@ -124,10 +124,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   });
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: _updateProfile,
-                child: Text('Update Profile'),
+                child: const Text('Update Profile'),
               ),
             ],
           ),

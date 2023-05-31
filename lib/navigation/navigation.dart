@@ -5,6 +5,8 @@ import 'package:globalgamestore/profile/profile.dart';
 
 
 class NavAppBar extends StatefulWidget {
+  const NavAppBar({super.key});
+
   @override
   _NavBarState createState() => _NavBarState();
 }
@@ -13,9 +15,9 @@ class _NavBarState extends State<NavAppBar> {
   int _selectedIndex = 0;
 
   final List<Widget> _widgetOptions = <Widget>[
-    HomePage(),
-    NotifikasiApp(),
-    ProfileApp(),
+    const HomePage(),
+    const NotifikasiApp(),
+    const ProfileApp(),
   ];
 
   @override
@@ -43,7 +45,7 @@ class _NavBarState extends State<NavAppBar> {
         // backgroundColor: Colors.orange,
         backgroundColor: Colors.white,
         selectedLabelStyle: const TextStyle(fontSize: 12),
-        selectedItemColor: Color(0xFFEE4532),
+        selectedItemColor: const Color(0xFFEE4532),
         // unselectedItemColor: Colors.green,
         onTap: (index) {
           setState(() {

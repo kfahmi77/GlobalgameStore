@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:globalgamestore/home/cart/cart.dart';
-import 'package:globalgamestore/home/viewproduct/viewdetailsliderscreen.dart';
-import 'package:globalgamestore/invoice/invoice.dart';
 import 'package:globalgamestore/navigation/navigation.dart';
-import 'package:path/path.dart';
+
+import '../../invoice/invoice.dart';
 
 class ViewDetailProductApp extends StatelessWidget {
   final Map<String, dynamic> data;
@@ -28,86 +26,20 @@ class ViewDetailProduct extends StatelessWidget {
   Widget build(BuildContext context) {
     final mediaQueryHeight = MediaQuery.of(context).size.height;
     final mediaQueryWidth = MediaQuery.of(context).size.width;
-    final _firestore = FirebaseFirestore.instance;
-    final User? _user = FirebaseAuth.instance.currentUser;
+    final firestore = FirebaseFirestore.instance;
+    final User? user = FirebaseAuth.instance.currentUser;
     final mediaContainerSearchHeight = (mediaQueryHeight * 0.15);
 
     Future addCart() async {
-      await _firestore.collection('keranjang').add({
+      await firestore.collection('keranjang').add({
         'nama_produk': data['nama_produk'],
         'harga_produk': data['harga_produk'],
         'image_url': data['image_url'],
-        'user_id': _user!.uid,
+        'user_id': user!.uid,
       });
     }
 
-    void showInsufficientBalanceDialog(BuildContext context) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Saldo Tidak Cukup'),
-            content: Text(
-                'Maaf, saldo Anda tidak mencukupi untuk melakukan pembelian.'),
-            actions: [
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.pop(context); // Menutup dialog
-                },
-              ),
-            ],
-          );
-        },
-      );
-    }
-
-    Future<void> beliProduk(
-        String userId, String productId, num hargaProduk) async {
-      // Mendapatkan referensi koleksi topup
-      CollectionReference topupRef =
-          FirebaseFirestore.instance.collection('topup');
-
-      try {
-        // Memulai transaksi batch
-        WriteBatch batch = FirebaseFirestore.instance.batch();
-
-        // Mengambil data topup saat ini berdasarkan ID pengguna
-        QuerySnapshot topupQuerySnapshot =
-            await topupRef.where('uid', isEqualTo: userId).get();
-        if (topupQuerySnapshot.size == 1) {
-          DocumentSnapshot topupSnapshot = topupQuerySnapshot.docs[0];
-          Map<String, dynamic>? topupData =
-              topupSnapshot.data() as Map<String, dynamic>?;
-          if (topupData != null) {
-            num saldo = topupData['amount'] ?? 0.0;
-
-            // Memeriksa apakah saldo cukup untuk membeli produk
-            if (saldo >= hargaProduk) {
-              // Mengurangi saldo dengan harga produk
-              num saldoBaru = saldo - hargaProduk;
-
-              // Memperbarui saldo di koleksi topup
-              batch.update(topupSnapshot.reference, {'amount': saldoBaru});
-
-              // Menandai produk sebagai sudah dibeli di koleksi produk
-
-              // Menyimpan perubahan menggunakan transaksi batch
-              await batch.commit();
-
-              print('Pembelian produk berhasil');
-            } else {
-              showInsufficientBalanceDialog(context);
-              print('Saldo tidak cukup');
-            }
-          }
-        } else {
-          print('Data topup tidak ditemukan');
-        }
-      } catch (e) {
-        print('Terjadi kesalahan: $e');
-      }
-    }
+   
 
     final myAppBar = AppBar(
         title: SizedBox(
@@ -161,7 +93,7 @@ class ViewDetailProduct extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return NavAppBar();
+                    return const NavAppBar();
                   },
                 ),
               );
@@ -242,14 +174,14 @@ class ViewDetailProduct extends StatelessWidget {
               width: mediaQueryWidth,
               height: mediaQueryHeight * 0.1,
               // color: Colors.amber,
-              child: const ListTile(
-                leading: CircleAvatar(
+              child: ListTile(
+                leading: const CircleAvatar(
                   backgroundColor: Color(0xFFEE4532),
                   radius: 40,
                 ),
-                title: Text('Seller1'),
-                subtitle: Text('Kota Bandung'),
-                trailing: Text(
+                title: Text(data['seller']),
+                subtitle: const Text('Kota Bandung'),
+                trailing: const Text(
                   'Kunjungi Toko',
                   style: TextStyle(
                     color: Color(0xFFEE4532),
@@ -341,16 +273,18 @@ class ViewDetailProduct extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      beliProduk(data['user_id'], data['deskripsi_produk'],
-                          data['harga_produk']);
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) {
-                      //       return const InvoiceApp();
-                      //     },
-                      //   ),
-                      // );
+                      // beliProduk(data['user_id'], data['deskripsi_produk'],
+                      //     data['harga_produk']);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return InvoiceApp(
+                              data: data,
+                            );
+                          },
+                        ),
+                      );
                     },
                   )
                 ],

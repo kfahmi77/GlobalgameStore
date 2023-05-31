@@ -14,13 +14,13 @@ class FireAuth {
   }) async {
     FirebaseAuth auth = FirebaseAuth.instance;
     User? user;
-    final _firestore = FirebaseFirestore.instance;
+    final firestore = FirebaseFirestore.instance;
     try {
       UserCredential userCredential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      await _firestore.collection('users').doc(userCredential.user!.uid).set({
+      await firestore.collection('users').doc(userCredential.user!.uid).set({
         'name': name,
         'email': email,
         'uid': userCredential.user!.uid,

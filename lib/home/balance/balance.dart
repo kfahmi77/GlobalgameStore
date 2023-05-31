@@ -9,7 +9,7 @@ class HomeBalanceApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return HomeBalance();
+    return const HomeBalance();
   }
 }
 
@@ -22,16 +22,16 @@ class HomeBalance extends StatelessWidget {
     final mediaQueryWidth = MediaQuery.of(context).size.width;
 
     final myAppBar = AppBar(
-        title: Text(
+        title: const Text(
           'SaldoKu',
           style: TextStyle(
               color: Colors.white, fontSize: 25, fontWeight: FontWeight.w400),
         ),
         // backgroundColor: Colors.white,
-        backgroundColor: Color(0xFFEE4532),
+        backgroundColor: const Color(0xFFEE4532),
         leading: Container(
           child: InkWell(
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back_outlined,
               size: 35,
               color: Colors.white,
@@ -41,7 +41,7 @@ class HomeBalance extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return NavAppBar();
+                    return const NavAppBar();
                   },
                 ),
               );
@@ -68,9 +68,9 @@ class HomeBalance extends StatelessWidget {
                     Container(
                       width: mediaQueryWidth,
                       height: mediaQueryHeight * 0.12,
-                      color: Color(0xFFEE4532),
+                      color: const Color(0xFFEE4532),
                       child: Center(
-                        child: Container(
+                        child: SizedBox(
                           width: mediaQueryWidth,
                           height: mediaQueryHeight * 0.05,
                           // color: Colors.white,
@@ -88,7 +88,7 @@ class HomeBalance extends StatelessWidget {
 
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
-                                  return CircularProgressIndicator();
+                                  return const CircularProgressIndicator();
                                 }
 
                                 List<DocumentSnapshot> documents =
@@ -102,7 +102,7 @@ class HomeBalance extends StatelessWidget {
                                   }
                                 }
                                 return Center(
-                                  child: Container(
+                                  child: SizedBox(
                                     width: mediaQueryWidth * 0.5,
                                     height: mediaQueryHeight * 0.05,
                                     // color: Colors.white,
@@ -110,7 +110,7 @@ class HomeBalance extends StatelessWidget {
                                       child: FittedBox(
                                         child: Text(
                                           'Rp $totalAmount',
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 25,
                                               color: Colors.white,
                                               fontWeight: FontWeight.w400),
@@ -126,9 +126,9 @@ class HomeBalance extends StatelessWidget {
                     Container(
                       width: mediaQueryWidth,
                       height: mediaQueryHeight * 0.15,
-                      color: Color(0xFFEE4532),
+                      color: const Color(0xFFEE4532),
                       child: Center(
-                        child: Container(
+                        child: SizedBox(
                           width: mediaQueryWidth * 0.8,
                           height: mediaQueryHeight * 0.12,
                           // color: Colors.white,
@@ -141,7 +141,7 @@ class HomeBalance extends StatelessWidget {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) {
-                                          return TopupScreen();
+                                          return const TopupScreen();
                                         },
                                       ),
                                     );
@@ -149,7 +149,7 @@ class HomeBalance extends StatelessWidget {
                                   child: Container(
                                     width: mediaQueryWidth * 0.4,
                                     height: mediaQueryHeight * 0.12,
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                         color: Colors.white,
                                         borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(20),
@@ -157,11 +157,11 @@ class HomeBalance extends StatelessWidget {
                                     child: Center(
                                       child: Column(
                                         children: [
-                                          Container(
+                                          SizedBox(
                                             width: mediaQueryWidth * 0.25,
                                             height: mediaQueryHeight * 0.075,
                                             // color: Colors.black,
-                                            child: Center(
+                                            child: const Center(
                                               child: Icon(
                                                 Icons.add_card,
                                                 size: 45,
@@ -169,11 +169,11 @@ class HomeBalance extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          Container(
+                                          SizedBox(
                                             width: mediaQueryWidth * 0.25,
                                             height: mediaQueryHeight * 0.04,
                                             // color: Color.fromARGB(255, 11, 34, 184),
-                                            child: Center(
+                                            child: const Center(
                                               child: Text(
                                                 'Isi Saldo',
                                                 style: TextStyle(
@@ -192,7 +192,7 @@ class HomeBalance extends StatelessWidget {
                                   width: mediaQueryWidth * 0.4,
                                   height: mediaQueryHeight * 0.12,
                                   // color: Color.fromARGB(255, 7, 85, 255),
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.only(
                                           topRight: Radius.circular(20),
@@ -200,11 +200,11 @@ class HomeBalance extends StatelessWidget {
                                   child: Center(
                                     child: Column(
                                       children: [
-                                        Container(
+                                        SizedBox(
                                           width: mediaQueryWidth * 0.25,
                                           height: mediaQueryHeight * 0.075,
                                           // color: Colors.black,
-                                          child: Center(
+                                          child: const Center(
                                             child: Icon(
                                               Icons.assured_workload_outlined,
                                               size: 45,
@@ -212,11 +212,11 @@ class HomeBalance extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        Container(
+                                        SizedBox(
                                           width: mediaQueryWidth * 0.25,
                                           height: mediaQueryHeight * 0.04,
                                           // color: Color.fromARGB(255, 11, 34, 184),
-                                          child: Center(
+                                          child: const Center(
                                             child: Text(
                                               'Tarik saldo',
                                               style: TextStyle(
@@ -242,13 +242,21 @@ class HomeBalance extends StatelessWidget {
               Container(
                 height: bodyHeight * 0.07,
                 width: mediaQueryWidth,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  // color: Colors.green,
+                  border: Border.all(
+                    color: const Color.fromARGB(255, 199, 199, 199),
+                    // width: 1,
+                  ),
+                ),
                 child: Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: mediaQueryWidth * 0.5,
                       height: bodyHeight * 0.07,
                       // color: Colors.green,
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Transaksi Terakhir',
                           style: TextStyle(
@@ -260,14 +268,6 @@ class HomeBalance extends StatelessWidget {
                     )
                   ],
                 ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  // color: Colors.green,
-                  border: Border.all(
-                    color: Color.fromARGB(255, 199, 199, 199),
-                    // width: 1,
-                  ),
-                ),
               ),
               // Divider(color: Colors.black,),
               Container(
@@ -276,7 +276,7 @@ class HomeBalance extends StatelessWidget {
                 child: ListView.builder(
                     itemCount: 25,
                     itemBuilder: (context, index) {
-                      return ListTile(
+                      return const ListTile(
                         leading: CircleAvatar(
                           backgroundColor: Color.fromARGB(255, 230, 230, 230),
                         ),

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:globalgamestore/navigation/navigation.dart';
 import 'package:globalgamestore/profile/profile.dart';
 import 'package:globalgamestore/responsive.dart';
 
@@ -24,7 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if (user != null) {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const ProfileApp(),
+          builder: (context) => const NavAppBar(),
         ),
       );
     }
@@ -37,19 +38,19 @@ class _LoginScreenState extends State<LoginScreen> {
     return FutureBuilder(
         future: _initializeFirebase(),
         builder: (context, snapshot) {
-          return Background(
+          return const Background(
             child: SingleChildScrollView(
               child: Responsive(
-                mobile: const MobileLoginScreen(),
+                mobile: MobileLoginScreen(),
                 desktop: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       child: LoginScreenTopImage(),
                     ),
                     Expanded(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           SizedBox(
                             width: 450,
                             child: LoginForm(),
@@ -73,12 +74,12 @@ class MobileLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        const LoginScreenTopImage(),
+        LoginScreenTopImage(),
         Row(
-          children: const [
+          children: [
             Spacer(),
             Expanded(
               flex: 8,

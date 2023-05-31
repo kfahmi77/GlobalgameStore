@@ -26,8 +26,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-              elevation: 0,
-              primary: kPrimaryColor,
+              elevation: 0, backgroundColor: kPrimaryColor,
               shape: const StadiumBorder(),
               maximumSize: const Size(double.infinity, 56),
               minimumSize: const Size(double.infinity, 56),
@@ -45,7 +44,7 @@ class MyApp extends StatelessWidget {
               borderSide: BorderSide.none,
             ),
           )),
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

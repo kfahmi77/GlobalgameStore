@@ -2,14 +2,13 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditProductScreen extends StatefulWidget {
   final String productId;
 
-  EditProductScreen({required this.productId});
+  const EditProductScreen({super.key, required this.productId});
 
   @override
   _EditProductScreenState createState() => _EditProductScreenState();
@@ -22,13 +21,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
   TextEditingController _detailController = TextEditingController();
   File? _pickedImage;
   String? _imageUrl;
-  List<String> _categoryGameList = [
+  final List<String> _categoryGameList = [
     'Pubg Mobile',
     'Pubg Pc',
     'Dota',
     'Mobile Lagends'
   ];
-  List<String> _listProducts = <String>['Pc', 'Mobile'];
+  final List<String> _listProducts = <String>['Pc', 'Mobile'];
   int _categoryGameIndex = 0;
   int _categoryProductIndex = 0;
 
@@ -130,7 +129,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Product'),
+        title: const Text('Edit Product'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -139,10 +138,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
           child: ListView(
             children: [
               ElevatedButton(
-                child: Text('Pilih Gambar'),
                 onPressed: _pickImage,
+                child: const Text('Pilih Gambar'),
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               _pickedImage != null
                   ? Image.file(
                       _pickedImage!,
@@ -158,10 +157,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           fit: BoxFit.cover,
                         )
                       : Container(),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Please enter a name';
@@ -169,10 +168,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextFormField(
                 controller: _priceController,
-                decoration: InputDecoration(labelText: 'Price'),
+                decoration: const InputDecoration(labelText: 'Price'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -184,10 +183,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextFormField(
                 controller: _detailController,
-                decoration: InputDecoration(labelText: 'Detail'),
+                decoration: const InputDecoration(labelText: 'Detail'),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Please enter a deskripsi_produk';
@@ -195,7 +194,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               DropdownButtonFormField<int>(
                 value: _categoryGameIndex,
                 items: _categoryGameList.asMap().entries.map((entry) {
@@ -211,7 +210,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     _categoryGameIndex = value!;
                   });
                 },
-                decoration: InputDecoration(labelText: 'Kategori Game'),
+                decoration: const InputDecoration(labelText: 'Kategori Game'),
                 validator: (value) {
                   if (value == null) {
                     return 'pilih kategori game';
@@ -219,7 +218,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               DropdownButtonFormField<int>(
                 value: _categoryProductIndex,
                 items: _listProducts.asMap().entries.map((entry) {
@@ -235,7 +234,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     _categoryGameIndex = value!;
                   });
                 },
-                decoration: InputDecoration(labelText: 'Katagori Produk'),
+                decoration: const InputDecoration(labelText: 'Katagori Produk'),
                 validator: (value) {
                   if (value == null) {
                     return 'Pilih kategori produk';
@@ -243,9 +242,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   return null;
                 },
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
-                child: Text('Save'),
+                child: const Text('Save'),
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     await _uploadImage();

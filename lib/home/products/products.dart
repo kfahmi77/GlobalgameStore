@@ -6,7 +6,7 @@ class ProductsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Products();
+    return const Products();
   }
 }
 
@@ -20,7 +20,7 @@ class Products extends StatelessWidget {
     final mediaQueryWidth = MediaQuery.of(context).size.width;
 
     final myAppBar = AppBar(
-          title: Text(
+          title: const Text(
             'Pubg',
             style: TextStyle(
               color: Colors.white,
@@ -29,10 +29,10 @@ class Products extends StatelessWidget {
             ),
           ),
           // backgroundColor: Colors.white,
-          backgroundColor: Color(0xFFEE4532),
+          backgroundColor: const Color(0xFFEE4532),
           leading: Container(
             child: InkWell(
-              child: Icon(
+              child: const Icon(
                 Icons.arrow_back_outlined,
                 size: 35,
                 color: Colors.white,
@@ -42,7 +42,7 @@ class Products extends StatelessWidget {
                   context,
                     MaterialPageRoute(
                       builder: (context) {
-                        return NavAppBar();
+                        return const NavAppBar();
                       },
                     ),
                 );
@@ -64,19 +64,19 @@ class Products extends StatelessWidget {
               Container(
                 width: mediaQueryWidth,
                 height: 305,
-                color: Color.fromARGB(255, 223, 223, 223),
+                color: const Color.fromARGB(255, 223, 223, 223),
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -93,8 +93,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -105,8 +105,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -117,14 +117,14 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -141,8 +141,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -153,8 +153,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -165,26 +165,26 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                 ],
                 ),
               ),
               Container(
                 width: mediaQueryWidth,
                 height: 305,
-                color: Color.fromARGB(255, 223, 223, 223),
+                color: const Color.fromARGB(255, 223, 223, 223),
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -201,8 +201,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -213,8 +213,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -225,14 +225,14 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -249,8 +249,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -261,8 +261,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -273,26 +273,26 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                 ],
                 ),
               ),
               Container(
                 width: mediaQueryWidth,
                 height: 305,
-                color: Color.fromARGB(255, 223, 223, 223),
+                color: const Color.fromARGB(255, 223, 223, 223),
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -309,8 +309,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -321,8 +321,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -333,14 +333,14 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -357,8 +357,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -369,8 +369,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -381,26 +381,26 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                 ],
                 ),
               ),
               Container(
                 width: mediaQueryWidth,
                 height: 305,
-                color: Color.fromARGB(255, 223, 223, 223),
+                color: const Color.fromARGB(255, 223, 223, 223),
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -417,8 +417,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -429,8 +429,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -441,14 +441,14 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -465,8 +465,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -477,8 +477,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -489,26 +489,26 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                 ],
                 ),
               ),
               Container(
                 width: mediaQueryWidth,
                 height: 305,
-                color: Color.fromARGB(255, 223, 223, 223),
+                color: const Color.fromARGB(255, 223, 223, 223),
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -525,8 +525,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -537,8 +537,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -549,14 +549,14 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -573,8 +573,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -585,8 +585,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -597,26 +597,26 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                 ],
                 ),
               ),
               Container(
                 width: mediaQueryWidth,
                 height: 305,
-                color: Color.fromARGB(255, 223, 223, 223),
+                color: const Color.fromARGB(255, 223, 223, 223),
                 child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -633,8 +633,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -645,8 +645,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -657,14 +657,14 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                   Container(
                     width: mediaQueryWidth * 0.48,
                     height: 300,
                     color: Colors.white,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: mediaQueryWidth * 0.48,
                           height: 200,
                           // color: Colors.amber,
@@ -681,8 +681,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Pubg Mobile',
                             style: TextStyle(
                               fontSize: 16
@@ -693,8 +693,8 @@ class Products extends StatelessWidget {
                           width: mediaQueryWidth * 0.48,
                           height: 50,
                           // color: Colors.red,
-                          padding: EdgeInsets.only(left: 12),
-                          child: Text(
+                          padding: const EdgeInsets.only(left: 12),
+                          child: const Text(
                             'Rp128.000',
                             style: TextStyle(
                               fontSize: 20,
@@ -705,7 +705,7 @@ class Products extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(width: 5,),
+                  const SizedBox(width: 5,),
                 ],
                 ),
               ),

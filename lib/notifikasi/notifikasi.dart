@@ -5,7 +5,7 @@ class NotifikasiApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Notifikasi();
+    return const Notifikasi();
   }
 }
 
@@ -18,7 +18,7 @@ class Notifikasi extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             'Notifikasi',
             style: TextStyle(
               color: Colors.black,
@@ -29,7 +29,7 @@ class Notifikasi extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
         body: ListView(
-          children: [
+          children: const [
             ListTile(
               leading: CircleAvatar(
                 backgroundColor: Colors.red,

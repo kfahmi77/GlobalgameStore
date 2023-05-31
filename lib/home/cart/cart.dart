@@ -51,7 +51,7 @@ class Cart extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return NavAppBar();
+                    return const NavAppBar();
                   },
                 ),
               );
@@ -72,12 +72,12 @@ class Cart extends StatelessWidget {
                 }
                 // data loading dulu
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
                 return ListView(
                   //mapping data
                   children: snapshot.data!.docs.map((data) {
-                    return Container(
+                    return SizedBox(
                       width: mediaQueryWidth,
                       height: mediaQueryHeight * 0.2,
                       // color: Colors.red,
@@ -100,13 +100,13 @@ class Cart extends StatelessWidget {
                             color: Colors.white,
                             child: Column(
                               children: [
-                                Container(
+                                SizedBox(
                                   width: mediaQueryWidth * 0.6,
                                   height: mediaQueryHeight * 0.14,
                                   // color: Colors.red,
                                   child: Column(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: mediaQueryWidth * 0.6,
                                         height: mediaQueryHeight * 0.07,
                                         // color: Colors.green,
@@ -121,14 +121,14 @@ class Cart extends StatelessWidget {
                                               data['nama_produk'],
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.w300),
                                             ),
                                           ),
                                         ),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: mediaQueryWidth * 0.6,
                                         height: mediaQueryHeight * 0.07,
                                         // color: Color.fromARGB(255, 76, 97, 175),
@@ -143,7 +143,7 @@ class Cart extends StatelessWidget {
                                               'Rp ${data['harga_produk']}',
                                               maxLines: 1,
                                               overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 18,
                                                 fontWeight: FontWeight.w400,
                                                 color: Color(0xFFEE4532),
@@ -155,13 +155,13 @@ class Cart extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                Container(
+                                SizedBox(
                                   width: mediaQueryWidth * 0.6,
                                   height: mediaQueryHeight * 0.06,
                                   // color: Color.fromARGB(255, 76, 97, 175),
                                   child: Row(
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: mediaQueryWidth * 0.3,
                                         height: mediaQueryHeight * 0.06,
                                         // color: Color.fromARGB(255, 20, 170, 43),
@@ -196,7 +196,7 @@ class Cart extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      Container(
+                                      SizedBox(
                                         width: mediaQueryWidth * 0.3,
                                         height: mediaQueryHeight * 0.06,
                                         // color: Color.fromARGB(255, 170, 123, 20),

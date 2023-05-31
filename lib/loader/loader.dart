@@ -6,11 +6,12 @@ import 'package:globalgamestore/navigation/navigation.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
   // const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-   final  User? user = FirebaseAuth.instance.currentUser;
 
 bool isLoggedIn() {
   User? user = FirebaseAuth.instance.currentUser;
@@ -23,8 +24,8 @@ bool isLoggedIn() {
       // const Text('Global', style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white))
     ],
   ),
-  backgroundColor: Color(0xFFEE4532),
-  nextScreen: isLoggedIn() ? NavAppBar() : LoginScreen(), // Ganti LoginPage dengan halaman login yang sesuai
+  backgroundColor: const Color(0xFFEE4532),
+  nextScreen: isLoggedIn() ? const NavAppBar() : const LoginScreen(), // Ganti LoginPage dengan halaman login yang sesuai
   splashIconSize: 90,
   duration: 4000,
   splashTransition: SplashTransition.fadeTransition,

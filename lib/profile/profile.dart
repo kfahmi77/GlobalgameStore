@@ -28,12 +28,12 @@ class Profile extends StatelessWidget {
       toolbarHeight: 120,
       title: Text(
         auth.currentUser?.displayName.toString() ?? 'Null',
-        style: TextStyle(
+        style: const TextStyle(
             color: Colors.white, fontSize: 25, fontWeight: FontWeight.w400),
       ),
       backgroundColor: const Color(0xFFEE4532),
       leading: CircleAvatar(
-          backgroundColor: Color.fromARGB(255, 230, 230, 230),
+          backgroundColor: const Color.fromARGB(255, 230, 230, 230),
           backgroundImage:
               NetworkImage(auth.currentUser?.photoURL.toString() ?? 'Null')),
       actions: [
@@ -58,10 +58,6 @@ class Profile extends StatelessWidget {
             ))
       ],
     );
-
-    final bodyHeight = mediaQueryHeight -
-        myAppBar.preferredSize.height -
-        MediaQuery.of(context).padding.top;
 
     return MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -443,7 +439,7 @@ class Profile extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return EditProfileScreen();
+                            return const EditProfileScreen();
                           },
                         ),
                       );

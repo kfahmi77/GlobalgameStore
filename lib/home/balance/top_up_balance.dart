@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:globalgamestore/home/home.dart';
 
 class TopupScreen extends StatefulWidget {
+  const TopupScreen({super.key});
+
   @override
   _TopupScreenState createState() => _TopupScreenState();
 }
@@ -25,14 +27,14 @@ class _TopupScreenState extends State<TopupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Top-Up'),
+        title: const Text('Top-Up'),
       ),
       body: Column(
         children: [
           Expanded(
             child: GridView.count(
               crossAxisCount: 2,
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               mainAxisSpacing: 16,
               crossAxisSpacing: 16,
               children: topupOptions.map((amount) {
@@ -46,11 +48,11 @@ class _TopupScreenState extends State<TopupScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: TextField(
               controller: customAmountController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Custom Amount',
               ),
             ),
@@ -63,7 +65,7 @@ class _TopupScreenState extends State<TopupScreen> {
                 topupMoney(user!.uid, customAmount);
               }
             },
-            child: Text('Top-Up Custom Amount'),
+            child: const Text('Top-Up Custom Amount'),
           ),
         ],
       ),
@@ -103,7 +105,7 @@ class _TopupScreenState extends State<TopupScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Top-Up Berhasil'),
+          title: const Text('Top-Up Berhasil'),
           content: Text('Top-Up sebesar Rp$amount berhasil.'),
           actions: [
             ElevatedButton(
@@ -112,10 +114,10 @@ class _TopupScreenState extends State<TopupScreen> {
                 Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                      builder: (BuildContext context) => HomePage(),
+                      builder: (BuildContext context) => const HomePage(),
                     ));
               },
-              child: Text('OK'),
+              child: const Text('OK'),
             ),
           ],
         );
@@ -128,7 +130,7 @@ class TopupOption extends StatelessWidget {
   final int amount;
   final Function onTap;
 
-  TopupOption({required this.amount, required this.onTap});
+  const TopupOption({super.key, required this.amount, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -144,15 +146,15 @@ class TopupOption extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.monetization_on,
               size: 40,
               color: Colors.white,
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Rp$amount',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

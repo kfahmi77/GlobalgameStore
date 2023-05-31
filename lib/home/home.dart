@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:globalgamestore/home/balance/balance.dart';
 import 'package:globalgamestore/home/cart/cart.dart';
@@ -10,9 +9,11 @@ import 'package:globalgamestore/home/slider/slider.dart';
 import 'package:globalgamestore/home/viewproduct/viewdetailproduct.dart';
 
 class HomePageApp extends StatelessWidget {
+  const HomePageApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: HomePage(),
     );
@@ -30,6 +31,25 @@ class HomePage extends StatelessWidget {
     Stream<QuerySnapshot> getData() {
       return firestore.collection('product').snapshots();
     }
+  Future<List<Map<String, dynamic>>> searchProducts(String keyword) async {
+  List<Map<String, dynamic>> searchResults = [];
+
+  try {
+    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+        .collection('products')
+        .where('name', isGreaterThanOrEqualTo: keyword)
+        .where('name', isLessThan: keyword + 'z')
+        .get();
+
+    querySnapshot.docs.forEach((document) {
+      searchResults.add(document.data() as Map<String, dynamic>);
+    });
+  } catch (e) {
+    print('Error searching products: $e');
+  }
+
+  return searchResults;
+}
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -42,16 +62,16 @@ class HomePage extends StatelessWidget {
               height: 40,
               width: mediaQueryWidth * 0.8,
               decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 232, 232, 232),
+                  color: const Color.fromARGB(255, 232, 232, 232),
                   borderRadius: BorderRadius.circular(5)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
+                  SizedBox(
                     width: mediaQueryWidth * 0.15,
                     height: 40,
                     // color: Colors.red,
-                    child: Icon(
+                    child: const Icon(
                       Icons.search,
                       color: Colors.grey,
                       size: 25,
@@ -65,7 +85,7 @@ class HomePage extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return SearchApp();
+                    return const SearchApp();
                   },
                 ),
               );
@@ -73,11 +93,11 @@ class HomePage extends StatelessWidget {
           ),
           actions: [
             InkWell(
-              child: Container(
+              child: SizedBox(
                 height: 40,
                 width: mediaQueryWidth * 0.2,
                 // color: Colors.green,
-                child: Center(
+                child: const Center(
                   child: Icon(
                     Icons.shopping_cart,
                     color: Color(0xFFEE4532),
@@ -90,7 +110,7 @@ class HomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      return CartApp();
+                      return const CartApp();
                     },
                   ),
                 );
@@ -122,26 +142,26 @@ class HomePage extends StatelessWidget {
         //     );
         //   },
         // ),
-        body: Container(
+        body: SizedBox(
           width: mediaQueryWidth,
           height: mediaQueryHeight,
           // color: Color.fromARGB(255, 44, 7, 255),
           child: ListView(
-            padding: EdgeInsets.only(top: 0.0),
+            padding: const EdgeInsets.only(top: 0.0),
             children: [
-              Container(
+              SizedBox(
                 width: mediaQueryWidth,
                 height: 196.5,
                 // color: Colors.amber,
-                child: SliderScreen(),
+                child: const SliderScreen(),
               ),
-              Container(
+              SizedBox(
                 width: mediaQueryWidth,
                 height: 100,
                 // child: BalanceApp(),
                 // color: Colors.amber,
                 child: Center(
-                  child: Container(
+                  child: SizedBox(
                     width: mediaQueryWidth * 0.9,
                     height: 65,
                     child: Row(
@@ -151,11 +171,11 @@ class HomePage extends StatelessWidget {
                           height: 65,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(10),
                                 bottomLeft: Radius.circular(10)),
                             border: Border.all(
-                              color: Color.fromARGB(255, 183, 183, 183),
+                              color: const Color.fromARGB(255, 183, 183, 183),
                               width: 1,
                             ),
                           ),
@@ -174,7 +194,7 @@ class HomePage extends StatelessWidget {
 
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
-                                return CircularProgressIndicator();
+                                return const CircularProgressIndicator();
                               }
 
                               List<DocumentSnapshot> documents =
@@ -190,11 +210,11 @@ class HomePage extends StatelessWidget {
                               return Center(
                                 child: Row(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: mediaQueryWidth * 0.13,
                                       height: 50,
                                       // color: Colors.red,
-                                      child: Center(
+                                      child: const Center(
                                         child: Icon(
                                           Icons.account_balance_wallet_outlined,
                                           size: 30,
@@ -202,7 +222,7 @@ class HomePage extends StatelessWidget {
                                         ),
                                       ),
                                     ),
-                                    Container(
+                                    SizedBox(
                                       width: mediaQueryWidth * 0.25,
                                       height: 50,
                                       // color: Colors.red,
@@ -210,7 +230,7 @@ class HomePage extends StatelessWidget {
                                         child: FittedBox(
                                           child: Text(
                                             'Rp $totalAmount',
-                                            style: TextStyle(fontSize: 20),
+                                            style: const TextStyle(fontSize: 20),
                                           ),
                                         ),
                                       ),
@@ -227,11 +247,11 @@ class HomePage extends StatelessWidget {
                             // color: Colors.white,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.only(
+                              borderRadius: const BorderRadius.only(
                                   topRight: Radius.circular(10),
                                   bottomRight: Radius.circular(10)),
                               border: Border.all(
-                                color: Color.fromARGB(255, 183, 183, 183),
+                                color: const Color.fromARGB(255, 183, 183, 183),
                                 width: 1,
                               ),
                             ),
@@ -239,11 +259,11 @@ class HomePage extends StatelessWidget {
                               child: Center(
                                 child: Row(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: mediaQueryWidth * 0.13,
                                       height: 50,
                                       // color: Colors.red,
-                                      child: Center(
+                                      child: const Center(
                                         child: Icon(
                                           Icons.add_card,
                                           size: 30,
@@ -255,7 +275,7 @@ class HomePage extends StatelessWidget {
                                       width: mediaQueryWidth * 0.25,
                                       height: 50,
                                       // color: Colors.red,
-                                      child: Center(
+                                      child: const Center(
                                         child: Text(
                                           'Isi Saldo',
                                           style: TextStyle(fontSize: 20),
@@ -270,7 +290,7 @@ class HomePage extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) {
-                                      return HomeBalanceApp();
+                                      return const HomeBalanceApp();
                                     },
                                   ),
                                 );
@@ -281,13 +301,13 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              Container(
+              SizedBox(
                 width: mediaQueryWidth,
                 height: 100,
                 // color: Color.fromARGB(255, 174, 141, 141),
                 // child: MenuApp(),
                 child: Center(
-                  child: Container(
+                  child: SizedBox(
                     width: mediaQueryWidth,
                     height: 80,
                     // color: Color.fromARGB(255, 148, 131, 130),
@@ -295,7 +315,7 @@ class HomePage extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       // padding: EdgeInsets.only(left: 20),
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Container(
@@ -304,14 +324,14 @@ class HomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                               // color: Colors.green,
                               border: Border.all(
-                                color: Color(0xFFEE4532),
+                                color: const Color(0xFFEE4532),
                                 width: 1,
                               ),
                               borderRadius: BorderRadius.circular(10)),
                           child: InkWell(
                             child: Column(
                               children: [
-                                Container(
+                                SizedBox(
                                   width: 70,
                                   height: 55,
                                   // color: Colors.red,
@@ -323,7 +343,7 @@ class HomePage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                                Container(
+                                const SizedBox(
                                   width: 70,
                                   height: 22,
                                   // color: Color.fromARGB(255, 99, 216, 22),
@@ -343,14 +363,14 @@ class HomePage extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) {
-                                    return ProductsApp();
+                                    return const ProductsApp();
                                   },
                                 ),
                               );
                             },
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Container(
@@ -359,13 +379,13 @@ class HomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                               // color: Colors.green,
                               border: Border.all(
-                                color: Color(0xFFEE4532),
+                                color: const Color(0xFFEE4532),
                                 width: 1,
                               ),
                               borderRadius: BorderRadius.circular(10)),
                           child: Column(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 70,
                                 height: 55,
                                 // color: Colors.red,
@@ -377,7 +397,7 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Container(
+                              const SizedBox(
                                 width: 70,
                                 height: 22,
                                 // color: Color.fromARGB(255, 99, 216, 22),
@@ -393,7 +413,7 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Container(
@@ -402,13 +422,13 @@ class HomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                               // color: Colors.green,
                               border: Border.all(
-                                color: Color(0xFFEE4532),
+                                color: const Color(0xFFEE4532),
                                 width: 1,
                               ),
                               borderRadius: BorderRadius.circular(10)),
                           child: Column(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 70,
                                 height: 55,
                                 // color: Colors.red,
@@ -420,7 +440,7 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Container(
+                              const SizedBox(
                                 width: 70,
                                 height: 22,
                                 // color: Color.fromARGB(255, 99, 216, 22),
@@ -436,7 +456,7 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Container(
@@ -445,13 +465,13 @@ class HomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                               // color: Colors.green,
                               border: Border.all(
-                                color: Color(0xFFEE4532),
+                                color: const Color(0xFFEE4532),
                                 width: 1,
                               ),
                               borderRadius: BorderRadius.circular(10)),
                           child: Column(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 70,
                                 height: 55,
                                 // color: Colors.red,
@@ -463,7 +483,7 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Container(
+                              const SizedBox(
                                 width: 70,
                                 height: 22,
                                 // color: Color.fromARGB(255, 99, 216, 22),
@@ -479,7 +499,7 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Container(
@@ -488,13 +508,13 @@ class HomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                               // color: Colors.green,
                               border: Border.all(
-                                color: Color(0xFFEE4532),
+                                color: const Color(0xFFEE4532),
                                 width: 1,
                               ),
                               borderRadius: BorderRadius.circular(10)),
                           child: Column(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 70,
                                 height: 55,
                                 // color: Colors.red,
@@ -506,7 +526,7 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Container(
+                              const SizedBox(
                                 width: 70,
                                 height: 22,
                                 // color: Color.fromARGB(255, 99, 216, 22),
@@ -522,7 +542,7 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Container(
@@ -531,13 +551,13 @@ class HomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                               // color: Colors.green,
                               border: Border.all(
-                                color: Color(0xFFEE4532),
+                                color: const Color(0xFFEE4532),
                                 width: 1,
                               ),
                               borderRadius: BorderRadius.circular(10)),
                           child: Column(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 70,
                                 height: 55,
                                 // color: Colors.red,
@@ -549,7 +569,7 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Container(
+                              const SizedBox(
                                 width: 70,
                                 height: 22,
                                 // color: Color.fromARGB(255, 99, 216, 22),
@@ -565,7 +585,7 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Container(
@@ -574,13 +594,13 @@ class HomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                               // color: Colors.green,
                               border: Border.all(
-                                color: Color(0xFFEE4532),
+                                color: const Color(0xFFEE4532),
                                 width: 1,
                               ),
                               borderRadius: BorderRadius.circular(10)),
                           child: Column(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 70,
                                 height: 55,
                                 // color: Colors.red,
@@ -592,7 +612,7 @@ class HomePage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Container(
+                              const SizedBox(
                                 width: 70,
                                 height: 22,
                                 // color: Color.fromARGB(255, 99, 216, 22),
@@ -608,7 +628,7 @@ class HomePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                       ],
@@ -619,7 +639,7 @@ class HomePage extends StatelessWidget {
               Container(
                 width: mediaQueryWidth,
                 height: 10,
-                color: Color.fromARGB(255, 223, 223, 223),
+                color: const Color.fromARGB(255, 223, 223, 223),
               ),
               Container(
                   width: mediaQueryWidth,
@@ -627,11 +647,11 @@ class HomePage extends StatelessWidget {
                   color: Colors.white,
                   child: Row(
                     children: [
-                      Container(
+                      SizedBox(
                         width: mediaQueryWidth * 0.4,
                         height: 50,
                         // color: Colors.red,
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'REKOMENDASI',
                             style: TextStyle(
@@ -650,17 +670,17 @@ class HomePage extends StatelessWidget {
                     return Text('Error ${snapshot.error}');
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                   return SingleChildScrollView(
                     child: Container(
                         width: mediaQueryWidth,
                         height: 305,
-                        color: Color.fromARGB(255, 223, 223, 223),
+                        color: const Color.fromARGB(255, 223, 223, 223),
                         child: GridView.count(
                           crossAxisCount: 2,
                           crossAxisSpacing: 10,
-                          padding: EdgeInsets.only(left: 10, top: 10),
+                          padding: const EdgeInsets.only(left: 10, top: 10),
                           mainAxisSpacing: 10,
                           children: snapshot.data!.docs
                               .map((DocumentSnapshot documentSnapshot) {
@@ -673,7 +693,7 @@ class HomePage extends StatelessWidget {
                                 color: const Color.fromARGB(255, 62, 52, 52),
                                 child: Column(
                                   children: [
-                                    Container(
+                                    SizedBox(
                                       width: mediaQueryWidth * 0.48,
                                       height: 60,
                                       // color: Colors.amber,
@@ -689,20 +709,20 @@ class HomePage extends StatelessWidget {
                                       width: mediaQueryWidth * 0.48,
                                       height: 50,
                                       // color: Colors.red,
-                                      padding: EdgeInsets.only(left: 12),
+                                      padding: const EdgeInsets.only(left: 12),
                                       child: Text(
                                         data['nama_produk'],
-                                        style: TextStyle(fontSize: 16),
+                                        style: const TextStyle(fontSize: 16),
                                       ),
                                     ),
                                     Container(
                                       width: mediaQueryWidth * 0.48,
                                       height: 50,
                                       // color: Colors.red,
-                                      padding: EdgeInsets.only(left: 12),
+                                      padding: const EdgeInsets.only(left: 12),
                                       child: Text(
                                         data['harga_produk'].toString(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 20, color: Colors.red),
                                       ),
                                     )
