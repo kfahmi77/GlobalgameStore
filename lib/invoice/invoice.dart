@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:globalgamestore/common/rupiah_convert.dart';
 import 'package:globalgamestore/navigation/navigation.dart';
 
 class InvoiceApp extends StatelessWidget {
@@ -54,6 +55,20 @@ class Invoice extends StatelessWidget {
           .delete()
           .then((value) => print("Product Deleted"))
           .catchError((error) => print("Failed to delete product: $error"));
+    }
+
+    Future<void> addRiwayat() async {
+      CollectionReference produkRef =
+          FirebaseFirestore.instance.collection('riwayat_produk');
+
+      DocumentReference docRef = await produkRef.add({
+        'nama_produk': data['nama_produk'],
+        'harga_produk': data['harga_produk'],
+        'kategori_produk': data['kategori_produk'],
+        'kategori_game': data['kategori_game'],
+        'image_url': data['image_url'],
+        'deskripsi_produk': data['deskripsi_produk']
+      });
     }
 
     void DialogSuccess(BuildContext context) {
@@ -237,7 +252,7 @@ class Invoice extends StatelessWidget {
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
                                     child: Text(
-                                      'Rp ${data['harga_produk']}',
+                                      formatRupiah(data['harga_produk']),
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -471,7 +486,7 @@ class Invoice extends StatelessWidget {
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
                                     child: Text(
-                                      'Rp' + data['harga_produk'].toString(),
+                                      formatRupiah(data['harga_produk']),
                                       style: TextStyle(
                                           // fontWeight: FontWeight.bold
                                           ),
@@ -508,7 +523,7 @@ class Invoice extends StatelessWidget {
                                     height: mediaQueryHeight * 0.02,
                                     // color: Color.fromARGB(255, 134, 41, 41),
                                     child: Text(
-                                      'Rp' + data['harga_produk'].toString(),
+                                      formatRupiah(data['harga_produk']),
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -544,9 +559,10 @@ class Invoice extends StatelessWidget {
                     ),
                   ),
                 ),
-                onTap: () {
+                onTap: () async {
                   beliProduk(user!.uid, data['deskripsi_produk'],
                       data['harga_produk']);
+                  await addRiwayat();
                 },
               )
             ],

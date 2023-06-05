@@ -8,6 +8,8 @@ import 'package:globalgamestore/home/search/search.dart';
 import 'package:globalgamestore/home/slider/slider.dart';
 import 'package:globalgamestore/home/viewproduct/viewdetailproduct.dart';
 
+import '../common/rupiah_convert.dart';
+
 class HomePageApp extends StatelessWidget {
   const HomePageApp({super.key});
 
@@ -31,25 +33,26 @@ class HomePage extends StatelessWidget {
     Stream<QuerySnapshot> getData() {
       return firestore.collection('product').snapshots();
     }
-  Future<List<Map<String, dynamic>>> searchProducts(String keyword) async {
-  List<Map<String, dynamic>> searchResults = [];
 
-  try {
-    QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-        .collection('products')
-        .where('name', isGreaterThanOrEqualTo: keyword)
-        .where('name', isLessThan: keyword + 'z')
-        .get();
+    Future<List<Map<String, dynamic>>> searchProducts(String keyword) async {
+      List<Map<String, dynamic>> searchResults = [];
 
-    querySnapshot.docs.forEach((document) {
-      searchResults.add(document.data() as Map<String, dynamic>);
-    });
-  } catch (e) {
-    print('Error searching products: $e');
-  }
+      try {
+        QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+            .collection('products')
+            .where('name', isGreaterThanOrEqualTo: keyword)
+            .where('name', isLessThan: keyword + 'z')
+            .get();
 
-  return searchResults;
-}
+        querySnapshot.docs.forEach((document) {
+          searchResults.add(document.data() as Map<String, dynamic>);
+        });
+      } catch (e) {
+        print('Error searching products: $e');
+      }
+
+      return searchResults;
+    }
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -229,8 +232,10 @@ class HomePage extends StatelessWidget {
                                       child: Center(
                                         child: FittedBox(
                                           child: Text(
-                                            'Rp $totalAmount',
-                                            style: const TextStyle(fontSize: 20),
+                                            formatRupiah(
+                                                totalAmount.toDouble()),
+                                            style:
+                                                const TextStyle(fontSize: 20),
                                           ),
                                         ),
                                       ),
@@ -721,7 +726,7 @@ class HomePage extends StatelessWidget {
                                       // color: Colors.red,
                                       padding: const EdgeInsets.only(left: 12),
                                       child: Text(
-                                        data['harga_produk'].toString(),
+                                        formatRupiah(data['harga_produk']),
                                         style: const TextStyle(
                                             fontSize: 20, color: Colors.red),
                                       ),

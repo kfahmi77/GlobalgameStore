@@ -152,66 +152,68 @@ class _SearchAppState extends State<SearchApp> {
               ],
             ),
           ),
-          if (searchResults.isNotEmpty)
-            Expanded(
-              child: ListView.builder(
-                itemCount: searchResults.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    child: Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                          // color: Colors.green,
-                          border: Border.all(
-                            color: const Color(0xFFEE4532),
-                            width: 1,
-                          ),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            width: 70,
-                            height: 55,
-                            // color: Colors.red,
-                            child: Center(
-                              child: FittedBox(
-                                fit: BoxFit.cover,
-                                child: Image.network(
-                                    searchResults[index]['image_url']),
+          searchResults.isNotEmpty
+              ? Expanded(
+                  child: ListView.builder(
+                    itemCount: searchResults.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                              // color: Colors.green,
+                              border: Border.all(
+                                color: const Color(0xFFEE4532),
+                                width: 1,
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 70,
-                            height: 22,
-                            // color: Color.fromARGB(255, 99, 216, 22),
-                            child: Center(
-                              child: FittedBox(
-                                child: Text(
-                                  searchResults[index]['nama_produk'],
-                                  style: TextStyle(fontSize: 20),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: 70,
+                                height: 55,
+                                // color: Colors.red,
+                                child: Center(
+                                  child: FittedBox(
+                                    fit: BoxFit.cover,
+                                    child: Image.network(
+                                        searchResults[index]['image_url']),
+                                  ),
                                 ),
                               ),
-                            ),
+                              SizedBox(
+                                width: 70,
+                                height: 22,
+                                // color: Color.fromARGB(255, 99, 216, 22),
+                                child: Center(
+                                  child: FittedBox(
+                                    child: Text(
+                                      searchResults[index]['nama_produk'],
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                  onTap: () {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => ViewDetailProduct(
-        data: searchResults[index],
-      ),
-    ),
-  );
-},
-                  );
-                },
-              ),
-            ),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ViewDetailProduct(
+                                data: searchResults[index],
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                )
+              : Text('tidak ada data')
+              
         ],
       ),
     );

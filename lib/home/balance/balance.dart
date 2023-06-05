@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:globalgamestore/home/balance/top_up_balance.dart';
 import 'package:globalgamestore/navigation/navigation.dart';
 
+import '../../common/rupiah_convert.dart';
+
 class HomeBalanceApp extends StatelessWidget {
   const HomeBalanceApp({super.key});
 
@@ -93,12 +95,12 @@ class HomeBalance extends StatelessWidget {
 
                                 List<DocumentSnapshot> documents =
                                     snapshot.data!.docs;
-                                int totalAmount = 0;
+                                num totalAmount = 0;
                                 for (DocumentSnapshot doc in documents) {
                                   Map<String, dynamic> data =
                                       doc.data() as Map<String, dynamic>;
                                   if (data.containsKey('amount')) {
-                                    totalAmount += data['amount'] as int;
+                                    totalAmount += data['amount'] as num;
                                   }
                                 }
                                 return Center(
@@ -109,7 +111,7 @@ class HomeBalance extends StatelessWidget {
                                     child: Center(
                                       child: FittedBox(
                                         child: Text(
-                                          'Rp $totalAmount',
+                                          formatRupiah(totalAmount.toDouble()),
                                           style: const TextStyle(
                                               fontSize: 25,
                                               color: Colors.white,

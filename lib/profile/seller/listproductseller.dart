@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:globalgamestore/profile/profile.dart';
 import 'package:globalgamestore/profile/seller/edit_product_seller.dart';
 
+import '../../common/rupiah_convert.dart';
+
 class ListProductsSellerApp extends StatelessWidget {
   const ListProductsSellerApp({super.key});
 
@@ -168,7 +170,8 @@ class ListProdutsSeller extends StatelessWidget {
                                               height: mediaQueryHeight * 0.04,
                                               // color: Colors.red,
                                               child: Text(
-                                                data['harga_produk'].toString(),
+                                                formatRupiah(
+                                                    data['harga_produk']),
                                                 maxLines: 1,
                                                 overflow: TextOverflow.ellipsis,
                                                 style: const TextStyle(

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:globalgamestore/checkout/checkout.dart';
 import 'package:globalgamestore/home/cart/cart.dart';
 import 'package:globalgamestore/navigation/navigation.dart';
 
@@ -38,8 +39,6 @@ class ViewDetailProduct extends StatelessWidget {
         'user_id': user!.uid,
       });
     }
-
-   
 
     final myAppBar = AppBar(
         title: SizedBox(
@@ -273,13 +272,11 @@ class ViewDetailProduct extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      // beliProduk(data['user_id'], data['deskripsi_produk'],
-                      //     data['harga_produk']);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
-                            return InvoiceApp(
+                            return CheckOutPage(
                               data: data,
                             );
                           },
