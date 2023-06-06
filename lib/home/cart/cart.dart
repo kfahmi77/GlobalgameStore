@@ -203,7 +203,8 @@ class Cart extends StatelessWidget {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) {
-                                                return CheckOutPage(data: data);
+                                                return CheckOutPage(
+                                                    data: data['nama_produk']);
                                               },
                                             ),
                                           );
