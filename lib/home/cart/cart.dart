@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:globalgamestore/checkout/checkout.dart';
 import 'package:globalgamestore/navigation/navigation.dart';
 
 class CartApp extends StatelessWidget {
@@ -196,25 +197,39 @@ class Cart extends StatelessWidget {
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        width: mediaQueryWidth * 0.3,
-                                        height: mediaQueryHeight * 0.06,
-                                        // color: Color.fromARGB(255, 170, 123, 20),
-                                        child: Center(
-                                          child: Container(
-                                            width: mediaQueryWidth * 0.28,
-                                            height: mediaQueryHeight * 0.05,
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xFFEE4532),
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            child: const Center(
-                                              child: Text(
-                                                'Checkout',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight: FontWeight.w400,
-                                                    color: Colors.white),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) {
+                                                return CheckOutPage(data: data);
+                                              },
+                                            ),
+                                          );
+                                        },
+                                        child: SizedBox(
+                                          width: mediaQueryWidth * 0.3,
+                                          height: mediaQueryHeight * 0.06,
+                                          // color: Color.fromARGB(255, 170, 123, 20),
+                                          child: Center(
+                                            child: Container(
+                                              width: mediaQueryWidth * 0.28,
+                                              height: mediaQueryHeight * 0.05,
+                                              decoration: BoxDecoration(
+                                                  color:
+                                                      const Color(0xFFEE4532),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              child: const Center(
+                                                child: Text(
+                                                  'Checkout',
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: Colors.white),
+                                                ),
                                               ),
                                             ),
                                           ),
